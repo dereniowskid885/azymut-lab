@@ -1,5 +1,5 @@
 import './globals.css'
-import {IBM_Plex_Mono, Inter, PT_Serif} from 'next/font/google'
+import {IBM_Plex_Mono, Lato, PT_Serif} from 'next/font/google'
 
 const serif = PT_Serif({
   variable: '--font-serif',
@@ -7,11 +7,10 @@ const serif = PT_Serif({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
-const sans = Inter({
+const sans = Lato({
   variable: '--font-sans',
   subsets: ['latin'],
-  // @todo: understand why extrabold (800) isn't being respected when explicitly specified in this weight array
-  // weight: ['500', '700', '800'],
+  weight: ['400', '700', '900'],
 })
 const mono = IBM_Plex_Mono({
   variable: '--font-mono',

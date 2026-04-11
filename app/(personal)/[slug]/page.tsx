@@ -49,28 +49,27 @@ export default async function PageSlugRoute({params}: Props) {
 
   return (
     <div>
-      <div className="mb-14">
-        {/* Header */}
-        <Header
+      {/* Header */}
+      <Header
+        id={data?._id || null}
+        type={data?._type || null}
+        path={['overview']}
+        title={title || (data?._id ? 'Untitled' : '404 Page Not Found')}
+        description={overview}
+      />
+
+      <div className="absolute left-0 w-screen border-t" />
+
+      {/* Body */}
+      {body && (
+        <CustomPortableText
           id={data?._id || null}
           type={data?._type || null}
-          path={['overview']}
-          title={title || (data?._id ? 'Untitled' : '404 Page Not Found')}
-          description={overview}
+          path={['body']}
+          paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+          value={body as unknown as PortableTextBlock[]}
         />
-
-        {/* Body */}
-        {body && (
-          <CustomPortableText
-            id={data?._id || null}
-            type={data?._type || null}
-            path={['body']}
-            paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
-            value={body as unknown as PortableTextBlock[]}
-          />
-        )}
-      </div>
-      <div className="absolute left-0 w-screen border-t" />
+      )}
     </div>
   )
 }

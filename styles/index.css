@@ -16,3 +16,8 @@ ul {
 ol {
   list-style-type: disc;
 }
+
+svg,
+img {
+  flex-shrink: 0;
+}

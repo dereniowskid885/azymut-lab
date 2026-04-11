@@ -1,13 +1,14 @@
 import {OptimisticSortOrder} from '@/components/OptimisticSortOrder'
-import type {SettingsQueryResult} from '@/sanity.types'
+import {MenuItemsQueryResult} from '@/sanity.types'
 import {studioUrl} from '@/sanity/lib/api'
 import {resolveHref} from '@/sanity/lib/utils'
 import {createDataAttribute, stegaClean} from 'next-sanity'
 import Link from 'next/link'
 
 interface NavbarProps {
-  data: SettingsQueryResult
+  data: MenuItemsQueryResult
 }
+
 export function Navbar(props: NavbarProps) {
   const {data} = props
   const dataAttribute =
@@ -19,8 +20,8 @@ export function Navbar(props: NavbarProps) {
         })
       : null
   return (
-    <header
-      className="sticky top-0 z-10 flex flex-wrap items-center gap-x-5 bg-white/80 px-4 py-4 backdrop-blur md:px-16 md:py-5 lg:px-32"
+    <nav
+      className="flex flex-wrap items-center gap-x-5 bg-white/80 py-4 backdrop-blur"
       data-sanity={dataAttribute?.('menuItems')}
     >
       <OptimisticSortOrder id={data?._id} path="menuItems">
@@ -32,8 +33,8 @@ export function Navbar(props: NavbarProps) {
           return (
             <Link
               key={menuItem._key}
-              className={`text-lg hover:text-black md:text-xl ${
-                menuItem?._type === 'home' ? 'font-extrabold text-black' : 'text-gray-600'
+              className={`text-lg hover:text-black md:text-xl font-bold ${
+                menuItem?._type === 'home' ? 'text-black' : 'text-gray-500'
               }`}
               data-sanity={dataAttribute?.([
                 'menuItems',
@@ -46,6 +47,6 @@ export function Navbar(props: NavbarProps) {
           )
         })}
       </OptimisticSortOrder>
-    </header>
+    </nav>
   )
 }

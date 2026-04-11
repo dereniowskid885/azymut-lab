@@ -25,20 +25,20 @@ export async function HomePage({data}: HomePageProps) {
       : null
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-4">
       {/* Header */}
       {title && (
         <Header
           id={data?._id || null}
           type={data?._type || null}
           path={['overview']}
-          centered
           title={title}
           description={overview}
         />
       )}
+
       {/* Showcase projects */}
-      <div className="mx-auto max-w-[100rem] rounded-md border">
+      <div className="max-w-[100rem] rounded-md border">
         <OptimisticSortOrder id={data?._id} path={'showcaseProjects'}>
           {showcaseProjects &&
             showcaseProjects.length > 0 &&
