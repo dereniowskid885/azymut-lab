@@ -10,29 +10,6 @@ export default defineType({
   // liveEdit: true,
   fields: [
     defineField({
-      name: 'menuItems',
-      title: 'Menu Item list',
-      description: 'Links displayed on the header of your site.',
-      type: 'array',
-      of: [
-        {
-          title: 'Reference',
-          type: 'reference',
-          to: [
-            {
-              type: 'home',
-            },
-            {
-              type: 'page',
-            },
-            {
-              type: 'project',
-            },
-          ],
-        },
-      ],
-    }),
-    defineField({
       name: 'footer',
       description: 'This is a block of text that will be displayed at the bottom of the page.',
       title: 'Footer Info',
@@ -60,10 +37,10 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'ogImage',
-      title: 'Open Graph Image',
+      name: 'logoImage',
+      title: 'Logo Image',
       type: 'image',
-      description: 'Displayed on social cards and search engine results.',
+      description: 'This image will be used as the logo for your personal website.',
       options: {
         hotspot: true,
       },

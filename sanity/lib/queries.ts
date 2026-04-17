@@ -4,47 +4,18 @@ export const homePageQuery = defineQuery(`
   *[_type == "home"][0]{
     _id,
     _type,
-    overview,
-    showcaseProjects[]{
+    imagesCarousel[]{
       _key,
-      ...@->{
-        _id,
-        _type,
-        coverImage,
-        overview,
-        "slug": slug.current,
-        tags,
-        title,
-      }
+      _id,
+      _type,
+      image,
+      title,
+      description,
+      link,
+      hoverText
     },
     title,
-  }
-`)
-
-export const pagesBySlugQuery = defineQuery(`
-  *[_type == "page" && slug.current == $slug][0] {
-    _id,
-    _type,
-    body,
-    overview,
-    title,
-    "slug": slug.current,
-  }
-`)
-
-export const projectBySlugQuery = defineQuery(`
-  *[_type == "project" && slug.current == $slug][0] {
-    _id,
-    _type,
-    client,
-    coverImage,
-    description,
-    duration,
-    overview,
-    site,
-    "slug": slug.current,
-    tags,
-    title,
+    description
   }
 `)
 
@@ -53,15 +24,115 @@ export const settingsQuery = defineQuery(`
     _id,
     _type,
     footer,
-    menuItems[]{
+    logoImage,
+  }
+`)
+
+export const offerPageQuery = defineQuery(`
+  *[_type == "offer"][0]{
+    _id,
+    _type,
+    title,
+    description,
+    services[]{
       _key,
-      ...@->{
-        _type,
-        "slug": slug.current,
-        title
-      }
+      icon,
+      title,
+      description,
+      scope
     },
-    ogImage,
+    process[]{
+      _key,
+      step,
+      title,
+      description
+    },
+    ctaTitle,
+    ctaDescription
+  }
+`)
+
+export const portfolioPageQuery = defineQuery(`
+  *[_type == "portfolio"][0]{
+    _id,
+    _type,
+    title,
+    description,
+    projects[]{
+      _key,
+      title,
+      category,
+      location,
+      area,
+      year,
+      description,
+      images[]{
+        _key,
+        asset->{
+          _id,
+          url,
+          metadata{
+            dimensions
+          }
+        },
+        hotspot,
+        crop
+      }
+    }
+  }
+`)
+
+export const contactPageQuery = defineQuery(`
+  *[_type == "contact"][0]{
+    _id,
+    _type,
+    title,
+    description,
+    email,
+    phone,
+    address{
+      street,
+      city,
+      postalCode
+    },
+    socialLinks{
+      instagram,
+      facebook,
+      linkedin,
+      pinterest
+    },
+    formTitle,
+    formDescription
+  }
+`)
+
+export const workPageQuery = defineQuery(`
+  *[_type == "work"][0]{
+    _id,
+    _type,
+    title,
+    description,
+    intro,
+    perks[]{
+      _key,
+      icon,
+      title,
+      description
+    },
+    openPositions[]{
+      _key,
+      position,
+      type,
+      experience,
+      description,
+      requirements,
+      isActive
+    },
+    spontaneousApplication{
+      title,
+      description,
+      email
+    }
   }
 `)
 

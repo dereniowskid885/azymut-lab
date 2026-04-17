@@ -1,6 +1,4 @@
 import '@/styles/index.css'
-import {CustomPortableText} from '@/components/CustomPortableText'
-import {Navbar} from '@/components/Navbar'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {homePageQuery, settingsQuery} from '@/sanity/lib/queries'
 import {urlForOpenGraphImage} from '@/sanity/lib/utils'
@@ -28,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
           default: homePage.title || 'Personal website',
         }
       : undefined,
-    description: homePage?.overview ? toPlainText(homePage.overview) : undefined,
+    description: homePage?.description,
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
@@ -41,21 +39,20 @@ export const viewport: Viewport = {
 
 export default async function IndexRoute({children}: {children: React.ReactNode}) {
   const {data} = await sanityFetch({query: settingsQuery})
+
   return (
     <>
       <div className="flex min-h-screen flex-col bg-white text-black">
-        <div className="flex-grow p-4 md:px-16 md:py-10 lg:px-20">{children}</div>
+        <div className="flex-grow p-[24px] md:px-[48px] md:pt-[40px] xl:px-[80px] pb-0 flex flex-col">
+          {children}
+        </div>
 
-        <footer className="bottom-0 w-full bg-white py-12 text-center md:py-20">
-          {data?.footer && (
-            <CustomPortableText
-              id={data._id}
-              type={data._type}
-              path={['footer']}
-              paragraphClasses="text-md md:text-xl"
-              value={data.footer as unknown as PortableTextBlock[]}
-            />
-          )}
+        <footer className="bottom-0 w-full bg-white py-2 text-center">
+          {data?.footer?.map((block) => (
+            <p key={block._key} className="text-xs text-black">
+              {toPlainText(block as PortableTextBlock)}
+            </p>
+          ))}
         </footer>
       </div>
 

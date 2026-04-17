@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .full-container-width {
+    @apply -mx-[24px] w-[calc(100%+48px)] px-[24px] md:-mx-[48px] md:w-[calc(100%+96px)] md:px-[48px] xl:-mx-[80px] xl:w-[calc(100%+160px)] xl:px-[80px];
+  }
+}

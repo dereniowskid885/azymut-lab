@@ -15,6 +15,18 @@ module.exports = {
       sans: 'var(--font-sans)',
       serif: 'var(--font-serif)',
     },
+    extend: {
+      colors: {
+        studio: {
+          100: '#d6d0c4',
+          200: '#c9c3b8',
+          300: '#bfb8ae',
+          400: '#b8b0a0',
+          500: '#a8a096',
+          600: '#9e9488',
+        },
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 }

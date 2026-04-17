@@ -2,10 +2,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-}
-
-p:not(:last-child) {
-  margin-bottom: 0.875rem;
+  font-size: clamp(14px, 0.8vw, 16px);
 }
 
 ol,
@@ -17,6 +14,7 @@ ol {
   list-style-type: disc;
 }
 
+a,
 svg,
 img {
   flex-shrink: 0;

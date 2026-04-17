@@ -1,4 +1,5 @@
-import {HomePage} from '@/components/HomePage'
+import {Header} from '@/components/Header'
+import ImageSlider from '@/components/ImageSlider'
 import {studioUrl} from '@/sanity/lib/api'
 import {sanityFetch} from '@/sanity/lib/live'
 import {homePageQuery} from '@/sanity/lib/queries'
@@ -19,5 +20,15 @@ export default async function IndexRoute() {
     )
   }
 
-  return <HomePage data={data} />
+  const {description = '', title = '', imagesCarousel = []} = data ?? {}
+
+  return (
+    <div className="space-y-6 md:space-y-12 flex-grow flex flex-col">
+      {title ? <Header title={title} description={description} /> : null}
+
+      <ImageSlider data={imagesCarousel} />
+
+      <hr className="border-gray-200 full-container-width" />
+    </div>
+  )
 }

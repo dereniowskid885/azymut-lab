@@ -15,27 +15,61 @@ import '@sanity/client'
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol
-
-type ArrayOf<T> = Array<
-  T & {
-    _key: string
-  }
->
-
 // Source: schema.json
-export type Timeline = {
-  _type: 'timeline'
-  items?: Array<{
+export type Work = {
+  _id: string
+  _type: 'work'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  intro?: string
+  perks?: Array<{
+    icon?: string
     title?: string
-    milestones?: Array<
-      {
-        _key: string
-      } & Milestone
-    >
-    _type: 'item'
+    description?: string
     _key: string
   }>
+  openPositions?: Array<{
+    position?: string
+    type?: 'uop' | 'b2b' | 'zlecenie' | 'staz'
+    experience?: 'junior' | 'mid' | 'senior'
+    description?: string
+    requirements?: Array<string>
+    isActive?: boolean
+    _key: string
+  }>
+  spontaneousApplication?: {
+    title?: string
+    description?: string
+    email?: string
+  }
+}
+
+export type Contact = {
+  _id: string
+  _type: 'contact'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  email?: string
+  phone?: string
+  address?: {
+    street?: string
+    city?: string
+    postalCode?: string
+  }
+  socialLinks?: {
+    instagram?: string
+    facebook?: string
+    linkedin?: string
+    pinterest?: string
+  }
+  formTitle?: string
+  formDescription?: string
 }
 
 export type SanityImageAssetReference = {
@@ -45,87 +79,31 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
-export type Milestone = {
-  _type: 'milestone'
-  title?: string
-  description?: string
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  tags?: Array<string>
-  duration?: Duration
-}
-
-export type Project = {
+export type Portfolio = {
   _id: string
-  _type: 'project'
+  _type: 'portfolio'
   _createdAt: string
   _updatedAt: string
   _rev: string
   title?: string
-  slug?: Slug
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
+  description?: string
+  projects?: Array<{
+    images?: Array<{
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
       _key: string
     }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
+    title?: string
+    category?: string
+    location?: string
+    area?: number
+    year?: number
+    description?: string
     _key: string
   }>
-  coverImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  duration?: Duration
-  client?: string
-  site?: string
-  tags?: Array<string>
-  description?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Timeline)
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        caption?: string
-        alt?: string
-        _type: 'image'
-        _key: string
-      }
-  >
 }
 
 export type SanityImageCrop = {
@@ -144,94 +122,29 @@ export type SanityImageHotspot = {
   width?: number
 }
 
-export type Duration = {
-  _type: 'duration'
-  start?: string
-  end?: string
-}
-
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
-export type Page = {
+export type Offer = {
   _id: string
-  _type: 'page'
+  _type: 'offer'
   _createdAt: string
   _updatedAt: string
   _rev: string
   title?: string
-  slug?: Slug
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
+  description?: string
+  services?: Array<{
+    icon?: string
+    title?: string
+    description?: string
+    scope?: Array<string>
     _key: string
   }>
-  body?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Timeline)
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        caption?: string
-        alt?: string
-        _type: 'image'
-        _key: string
-      }
-  >
-}
-
-export type HomeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'home'
-}
-
-export type PageReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'page'
-}
-
-export type ProjectReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'project'
+  process?: Array<{
+    step?: number
+    title?: string
+    description?: string
+    _key: string
+  }>
+  ctaTitle?: string
+  ctaDescription?: string
 }
 
 export type Settings = {
@@ -240,7 +153,6 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  menuItems?: ArrayOf<HomeReference | PageReference | ProjectReference>
   footer?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -259,7 +171,7 @@ export type Settings = {
     _type: 'block'
     _key: string
   }>
-  ogImage?: {
+  logoImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -275,29 +187,21 @@ export type Home = {
   _updatedAt: string
   _rev: string
   title?: string
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
+  description?: string
+  imagesCarousel?: Array<{
+    image?: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+    title?: string
+    description?: string
+    hoverText?: string
+    link?: string
     _key: string
   }>
-  showcaseProjects?: Array<
-    {
-      _key: string
-    } & ProjectReference
-  >
 }
 
 export type SanityImagePaletteSwatch = {
@@ -397,19 +301,20 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
 export type AllSanitySchemaTypes =
-  | Timeline
+  | Work
+  | Contact
   | SanityImageAssetReference
-  | Milestone
-  | Project
+  | Portfolio
   | SanityImageCrop
   | SanityImageHotspot
-  | Duration
-  | Slug
-  | Page
-  | HomeReference
-  | PageReference
-  | ProjectReference
+  | Offer
   | Settings
   | Home
   | SanityImagePaletteSwatch
@@ -420,191 +325,39 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+  | Slug
+
+export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "home"][0]{    _id,    _type,    overview,    showcaseProjects[]{      _key,      ...@->{        _id,        _type,        coverImage,        overview,        "slug": slug.current,        tags,        title,      }    },    title,  }
+// Query: *[_type == "home"][0]{    _id,    _type,    imagesCarousel[]{      _key,      _id,      _type,      image,      title,      description,      link,      hoverText    },    title,    description  }
 export type HomePageQueryResult = {
   _id: string
   _type: 'home'
-  overview: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
+  imagesCarousel: Array<{
     _key: string
-  }> | null
-  showcaseProjects: Array<{
-    _key: string
-    _id: string
-    _type: 'project'
-    coverImage: {
+    _id: null
+    _type: null
+    image: {
       asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
       _type: 'image'
     } | null
-    overview: Array<{
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'normal'
-      listItem?: never
-      markDefs?: null
-      level?: number
-      _type: 'block'
-      _key: string
-    }> | null
-    slug: string | null
-    tags: Array<string> | null
     title: string | null
+    description: string | null
+    link: string | null
+    hoverText: string | null
   }> | null
   title: string | null
-} | null
-
-// Source: sanity/lib/queries.ts
-// Variable: pagesBySlugQuery
-// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    _type,    body,    overview,    title,    "slug": slug.current,  }
-export type PagesBySlugQueryResult = {
-  _id: string
-  _type: 'page'
-  body: Array<
-    | ({
-        _key: string
-      } & Timeline)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        caption?: string
-        alt?: string
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  overview: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
-    _key: string
-  }> | null
-  title: string | null
-  slug: string | null
-} | null
-
-// Source: sanity/lib/queries.ts
-// Variable: projectBySlugQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    _type,    client,    coverImage,    description,    duration,    overview,    site,    "slug": slug.current,    tags,    title,  }
-export type ProjectBySlugQueryResult = {
-  _id: string
-  _type: 'project'
-  client: string | null
-  coverImage: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  } | null
-  description: Array<
-    | ({
-        _key: string
-      } & Timeline)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        caption?: string
-        alt?: string
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  duration: Duration | null
-  overview: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
-    _key: string
-  }> | null
-  site: string | null
-  slug: string | null
-  tags: Array<string> | null
-  title: string | null
+  description: string | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    menuItems[]{      _key,      ...@->{        _type,        "slug": slug.current,        title      }    },    ogImage,  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    logoImage,  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -626,27 +379,7 @@ export type SettingsQueryResult = {
     _type: 'block'
     _key: string
   }> | null
-  menuItems: Array<
-    | {
-        _key: null
-        _type: 'home'
-        slug: null
-        title: string | null
-      }
-    | {
-        _key: null
-        _type: 'page'
-        slug: string | null
-        title: string | null
-      }
-    | {
-        _key: null
-        _type: 'project'
-        slug: string | null
-        title: string | null
-      }
-  > | null
-  ogImage: {
+  logoImage: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -656,18 +389,130 @@ export type SettingsQueryResult = {
 } | null
 
 // Source: sanity/lib/queries.ts
+// Variable: offerPageQuery
+// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      icon,      title,      description,      scope    },    process[]{      _key,      step,      title,      description    },    ctaTitle,    ctaDescription  }
+export type OfferPageQueryResult = {
+  _id: string
+  _type: 'offer'
+  title: string | null
+  description: string | null
+  services: Array<{
+    _key: string
+    icon: string | null
+    title: string | null
+    description: string | null
+    scope: Array<string> | null
+  }> | null
+  process: Array<{
+    _key: string
+    step: number | null
+    title: string | null
+    description: string | null
+  }> | null
+  ctaTitle: string | null
+  ctaDescription: string | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: portfolioPageQuery
+// Query: *[_type == "portfolio"][0]{    _id,    _type,    title,    description,    projects[]{      _key,      title,      category,      location,      area,      year,      description,      images[]{        _key,        asset->{          _id,          url,          metadata{            dimensions          }        },        hotspot,        crop      }    }  }
+export type PortfolioPageQueryResult = {
+  _id: string
+  _type: 'portfolio'
+  title: string | null
+  description: string | null
+  projects: Array<{
+    _key: string
+    title: string | null
+    category: string | null
+    location: string | null
+    area: number | null
+    year: number | null
+    description: string | null
+    images: Array<{
+      _key: string
+      asset: {
+        _id: string
+        url: string | null
+        metadata: {
+          dimensions: SanityImageDimensions | null
+        } | null
+      } | null
+      hotspot: SanityImageHotspot | null
+      crop: SanityImageCrop | null
+    }> | null
+  }> | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: contactPageQuery
+// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription  }
+export type ContactPageQueryResult = {
+  _id: string
+  _type: 'contact'
+  title: string | null
+  description: string | null
+  email: string | null
+  phone: string | null
+  address: {
+    street: string | null
+    city: string | null
+    postalCode: string | null
+  } | null
+  socialLinks: {
+    instagram: string | null
+    facebook: string | null
+    linkedin: string | null
+    pinterest: string | null
+  } | null
+  formTitle: string | null
+  formDescription: string | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: workPageQuery
+// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    intro,    perks[]{      _key,      icon,      title,      description    },    openPositions[]{      _key,      position,      type,      experience,      description,      requirements,      isActive    },    spontaneousApplication{      title,      description,      email    }  }
+export type WorkPageQueryResult = {
+  _id: string
+  _type: 'work'
+  title: string | null
+  description: string | null
+  intro: string | null
+  perks: Array<{
+    _key: string
+    icon: string | null
+    title: string | null
+    description: string | null
+  }> | null
+  openPositions: Array<{
+    _key: string
+    position: string | null
+    type: 'b2b' | 'staz' | 'uop' | 'zlecenie' | null
+    experience: 'junior' | 'mid' | 'senior' | null
+    description: string | null
+    requirements: Array<string> | null
+    isActive: boolean | null
+  }> | null
+  spontaneousApplication: {
+    title: string | null
+    description: string | null
+    email: string | null
+  } | null
+} | null
+
+// Source: sanity/lib/queries.ts
 // Variable: slugsByTypeQuery
 // Query: *[_type == $type && defined(slug.current)]{"slug": slug.current}
-export type SlugsByTypeQueryResult = Array<{
-  slug: string | null
-}>
+export type SlugsByTypeQueryResult = Array<never>
 
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    overview,\n    showcaseProjects[]{\n      _key,\n      ...@->{\n        _id,\n        _type,\n        coverImage,\n        overview,\n        "slug": slug.current,\n        tags,\n        title,\n      }\n    },\n    title,\n  }\n': HomePageQueryResult
-    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    _type,\n    body,\n    overview,\n    title,\n    "slug": slug.current,\n  }\n': PagesBySlugQueryResult
-    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    _type,\n    client,\n    coverImage,\n    description,\n    duration,\n    overview,\n    site,\n    "slug": slug.current,\n    tags,\n    title,\n  }\n': ProjectBySlugQueryResult
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
+    '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
+    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      icon,\n      title,\n      description,\n      scope\n    },\n    process[]{\n      _key,\n      step,\n      title,\n      description\n    },\n    ctaTitle,\n    ctaDescription\n  }\n': OfferPageQueryResult
+    '\n  *[_type == "portfolio"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    projects[]{\n      _key,\n      title,\n      category,\n      location,\n      area,\n      year,\n      description,\n      images[]{\n        _key,\n        asset->{\n          _id,\n          url,\n          metadata{\n            dimensions\n          }\n        },\n        hotspot,\n        crop\n      }\n    }\n  }\n': PortfolioPageQueryResult
+    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription\n  }\n': ContactPageQueryResult
+    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    intro,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n    openPositions[]{\n      _key,\n      position,\n      type,\n      experience,\n      description,\n      requirements,\n      isActive\n    },\n    spontaneousApplication{\n      title,\n      description,\n      email\n    }\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }
