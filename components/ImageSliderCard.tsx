@@ -57,7 +57,7 @@ export default function ImageSliderCard({
         <div className="absolute top-4 left-4 right-4 space-y-1">
           <h3 className="font-sans text-white text-2xl font-bold leading-tight">{title}</h3>
 
-          {description && <p className="text-white/80 text-md line-clamp-2">{description}</p>}
+          {description && <p className="text-white/80 text-md">{description}</p>}
         </div>
 
         <p

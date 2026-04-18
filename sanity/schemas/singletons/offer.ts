@@ -32,12 +32,6 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'icon',
-              title: 'Ikona (emoji lub kod)',
-              description: 'Np. 🏠 lub nazwa ikony do wyświetlenia przy usłudze.',
-              type: 'string',
-            }),
-            defineField({
               name: 'title',
               title: 'Nazwa usługi',
               type: 'string',
@@ -45,67 +39,83 @@ export default defineType({
             }),
             defineField({
               name: 'description',
-              title: 'Opis usługi',
-              description: 'Krótki opis czym jest dana usługa i co obejmuje.',
+              title: 'Krótki opis usługi',
+              description:
+                'Np. "Kompleksowa dokumentacja techniczna dopasowana do skali inwestycji."',
               type: 'text',
-              rows: 4,
+              rows: 3,
             }),
             defineField({
-              name: 'scope',
-              title: 'Zakres prac',
-              description:
-                'Lista elementów wchodzących w skład usługi (np. projekt, nadzór, odbiór).',
+              name: 'note',
+              title: 'Ważna informacja (opcjonalna)',
+              description: 'Np. ostrzeżenie o prawach autorskich przy projekcie zewnętrznym.',
+              type: 'text',
+              rows: 3,
+            }),
+            defineField({
+              name: 'variants',
+              title: 'Warianty',
+              description: 'Np. Basic, Extended, Premium.',
               type: 'array',
-              of: [defineArrayMember({type: 'string'})],
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'badge',
+                      title: 'Etykieta',
+                      description: 'Np. "Podstawowa", "Rekomendowana", "Pod klucz".',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'name',
+                      title: 'Nazwa wariantu',
+                      description: 'Np. "Basic", "Extended", "Premium".',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'isRecommended',
+                      title: 'Wyróżniony wariant',
+                      description: 'Zaznacz aby wyróżnić ten wariant ciemnym tłem.',
+                      type: 'boolean',
+                      initialValue: false,
+                    }),
+                    defineField({
+                      name: 'items',
+                      title: 'Zakres wariantu',
+                      description: 'Lista elementów wchodzących w skład tego wariantu.',
+                      type: 'array',
+                      of: [defineArrayMember({type: 'string'})],
+                    }),
+                    defineField({
+                      name: 'note',
+                      title: 'Ważna informacja (opcjonalna)',
+                      description: 'Np. "Nie obejmuje: zabudów stałych, karniszy".',
+                      type: 'string',
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      title: 'name',
+                      subtitle: 'badge',
+                    },
+                    prepare({title, subtitle}) {
+                      return {
+                        title,
+                        subtitle,
+                      }
+                    },
+                  },
+                }),
+              ],
             }),
           ],
           preview: {
             select: {
               title: 'title',
               subtitle: 'description',
-            },
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'process',
-      title: 'Proces współpracy',
-      description: 'Kroki opisujące jak wygląda współpraca z Azymut Lab od A do Z.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'step',
-              title: 'Numer kroku',
-              type: 'number',
-              validation: (Rule) => Rule.required().integer().positive(),
-            }),
-            defineField({
-              name: 'title',
-              title: 'Nazwa etapu',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'description',
-              title: 'Opis etapu',
-              type: 'text',
-              rows: 3,
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'title',
-              subtitle: 'step',
-            },
-            prepare({title, subtitle}) {
-              return {
-                title,
-                subtitle: `Krok ${subtitle}`,
-              }
             },
           },
         }),

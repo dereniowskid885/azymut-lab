@@ -131,16 +131,17 @@ export type Offer = {
   title?: string
   description?: string
   services?: Array<{
-    icon?: string
     title?: string
     description?: string
-    scope?: Array<string>
-    _key: string
-  }>
-  process?: Array<{
-    step?: number
-    title?: string
-    description?: string
+    note?: string
+    variants?: Array<{
+      badge?: string
+      name?: string
+      isRecommended?: boolean
+      items?: Array<string>
+      note?: string
+      _key: string
+    }>
     _key: string
   }>
   ctaTitle?: string
@@ -390,7 +391,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: offerPageQuery
-// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      icon,      title,      description,      scope    },    process[]{      _key,      step,      title,      description    },    ctaTitle,    ctaDescription  }
+// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription  }
 export type OfferPageQueryResult = {
   _id: string
   _type: 'offer'
@@ -398,16 +399,17 @@ export type OfferPageQueryResult = {
   description: string | null
   services: Array<{
     _key: string
-    icon: string | null
     title: string | null
     description: string | null
-    scope: Array<string> | null
-  }> | null
-  process: Array<{
-    _key: string
-    step: number | null
-    title: string | null
-    description: string | null
+    note: string | null
+    variants: Array<{
+      _key: string
+      badge: string | null
+      name: string | null
+      isRecommended: boolean | null
+      items: Array<string> | null
+      note: string | null
+    }> | null
   }> | null
   ctaTitle: string | null
   ctaDescription: string | null
@@ -509,7 +511,7 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
-    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      icon,\n      title,\n      description,\n      scope\n    },\n    process[]{\n      _key,\n      step,\n      title,\n      description\n    },\n    ctaTitle,\n    ctaDescription\n  }\n': OfferPageQueryResult
+    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription\n  }\n': OfferPageQueryResult
     '\n  *[_type == "portfolio"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    projects[]{\n      _key,\n      title,\n      category,\n      location,\n      area,\n      year,\n      description,\n      images[]{\n        _key,\n        asset->{\n          _id,\n          url,\n          metadata{\n            dimensions\n          }\n        },\n        hotspot,\n        crop\n      }\n    }\n  }\n': PortfolioPageQueryResult
     '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription\n  }\n': ContactPageQueryResult
     '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    intro,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n    openPositions[]{\n      _key,\n      position,\n      type,\n      experience,\n      description,\n      requirements,\n      isActive\n    },\n    spontaneousApplication{\n      title,\n      description,\n      email\n    }\n  }\n': WorkPageQueryResult

@@ -25,6 +25,11 @@ module.exports = {
           500: '#a8a096',
           600: '#9e9488',
         },
+        warning: {
+          bg: '#fdf6e9',
+          border: '#e8c97a',
+          text: '#7D664A',
+        },
       },
     },
   },

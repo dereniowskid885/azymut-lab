@@ -36,16 +36,17 @@ export const offerPageQuery = defineQuery(`
     description,
     services[]{
       _key,
-      icon,
       title,
       description,
-      scope
-    },
-    process[]{
-      _key,
-      step,
-      title,
-      description
+      note,
+      variants[]{
+        _key,
+        badge,
+        name,
+        isRecommended,
+        items,
+        note
+      }
     },
     ctaTitle,
     ctaDescription

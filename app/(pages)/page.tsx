@@ -23,7 +23,7 @@ export default async function IndexRoute() {
   const {description = '', title = '', imagesCarousel = []} = data ?? {}
 
   return (
-    <div className="space-y-6 md:space-y-12 flex-grow flex flex-col">
+    <div className="space-y-8 md:space-y-12 flex-grow flex flex-col">
       {title ? <Header title={title} description={description} /> : null}
 
       <ImageSlider data={imagesCarousel} />
