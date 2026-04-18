@@ -18,12 +18,15 @@ export default function OfferSliderCard({
   index,
 }: IOfferSliderCard) {
   const cardRef = useRef(null)
+
   const [isCardVisibleMobile, setCardVisibleMobile] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setCardVisibleMobile(entry.isIntersecting),
-      {threshold: 0.8},
+      {
+        threshold: 0.8,
+      },
     )
 
     if (cardRef.current) observer.observe(cardRef.current)

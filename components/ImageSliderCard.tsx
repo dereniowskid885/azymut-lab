@@ -24,7 +24,7 @@ export default function ImageSliderCard({
     const observer = new IntersectionObserver(
       ([entry]) => setCardVisibleMobile(entry.isIntersecting),
       {
-        threshold: 1,
+        threshold: 0.8,
       },
     )
 
@@ -35,7 +35,7 @@ export default function ImageSliderCard({
   return (
     <div
       ref={cardRef}
-      className="relative w-[75vw] md:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 opacity-90 hover:opacity-100 transition duration-700 group h-full"
+      className={`relative w-[75vw] md:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 opacity-90 hover:opacity-100 transition duration-700 group h-full`}
     >
       <div
         className={`w-full h-full p-4 ${imageUrl ? '' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'}`}
