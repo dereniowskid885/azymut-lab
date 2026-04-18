@@ -1,7 +1,7 @@
 import {menuObj} from '@/const/menu'
 import NavLink from './NavLink'
 
-export function Navbar() {
+export default function Navbar() {
   return (
     <nav className="flex flex-wrap items-center gap-x-5 bg-white/80 backdrop-blur">
       {menuObj?.map((menuItem) => {

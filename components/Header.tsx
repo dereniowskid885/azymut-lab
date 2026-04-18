@@ -4,7 +4,7 @@ import {urlForImage} from '@/sanity/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Image as IImage} from 'sanity'
-import {Navbar} from './Navbar'
+import Navbar from './Navbar'
 
 interface HeaderProps {
   title?: string | null

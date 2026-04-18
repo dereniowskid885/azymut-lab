@@ -89,6 +89,7 @@ export const contactPageQuery = defineQuery(`
     _type,
     title,
     description,
+    image,
     email,
     phone,
     address{

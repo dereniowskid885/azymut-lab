@@ -47,7 +47,7 @@ export default async function IndexRoute({children}: {children: React.ReactNode}
           {children}
         </div>
 
-        <footer className="bottom-0 w-full bg-white py-2 text-center">
+        <footer className="bottom-0 w-full bg-white py-2 text-center mt-4 md:mt-8">
           {data?.footer?.map((block) => (
             <p key={block._key} className="text-xs text-black">
               {toPlainText(block as PortableTextBlock)}

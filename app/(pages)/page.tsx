@@ -27,8 +27,6 @@ export default async function IndexRoute() {
       {title ? <Header title={title} description={description} /> : null}
 
       <ImageSlider data={imagesCarousel} />
-
-      <hr className="border-gray-200 full-container-width" />
     </div>
   )
 }

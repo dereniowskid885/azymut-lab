@@ -47,6 +47,13 @@ export type Work = {
   }
 }
 
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
 export type Contact = {
   _id: string
   _type: 'contact'
@@ -55,6 +62,13 @@ export type Contact = {
   _rev: string
   title?: string
   description?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   email?: string
   phone?: string
   address?: {
@@ -72,11 +86,20 @@ export type Contact = {
   formDescription?: string
 }
 
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
 }
 
 export type Portfolio = {
@@ -104,22 +127,6 @@ export type Portfolio = {
     description?: string
     _key: string
   }>
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
 }
 
 export type Offer = {
@@ -310,11 +317,11 @@ export type Slug = {
 
 export type AllSanitySchemaTypes =
   | Work
-  | Contact
   | SanityImageAssetReference
-  | Portfolio
+  | Contact
   | SanityImageCrop
   | SanityImageHotspot
+  | Portfolio
   | Offer
   | Settings
   | Home
@@ -448,12 +455,19 @@ export type PortfolioPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: contactPageQuery
-// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription  }
+// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription  }
 export type ContactPageQueryResult = {
   _id: string
   _type: 'contact'
   title: string | null
   description: string | null
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
   email: string | null
   phone: string | null
   address: {
@@ -513,7 +527,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
     '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription\n  }\n': OfferPageQueryResult
     '\n  *[_type == "portfolio"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    projects[]{\n      _key,\n      title,\n      category,\n      location,\n      area,\n      year,\n      description,\n      images[]{\n        _key,\n        asset->{\n          _id,\n          url,\n          metadata{\n            dimensions\n          }\n        },\n        hotspot,\n        crop\n      }\n    }\n  }\n': PortfolioPageQueryResult
-    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription\n  }\n': ContactPageQueryResult
+    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription\n  }\n': ContactPageQueryResult
     '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    intro,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n    openPositions[]{\n      _key,\n      position,\n      type,\n      experience,\n      description,\n      requirements,\n      isActive\n    },\n    spontaneousApplication{\n      title,\n      description,\n      email\n    }\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }

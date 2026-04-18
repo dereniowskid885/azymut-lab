@@ -4,7 +4,6 @@
  * This config is used to set up Sanity Studio that's mounted on the `app/studio/[[...index]]/page.tsx` route
  */
 import {apiVersion, dataset, projectId, studioUrl} from '@/sanity/lib/api'
-import * as resolve from '@/sanity/plugins/resolve'
 import {pageStructure, singletonPlugin} from '@/sanity/plugins/settings'
 import home from '@/sanity/schemas/singletons/home'
 import settings from '@/sanity/schemas/singletons/settings'
@@ -42,7 +41,6 @@ export default defineConfig({
       structure: pageStructure([home, settings, offer, portfolio, contact, work]),
     }),
     presentationTool({
-      resolve,
       previewUrl: {previewMode: {enable: '/api/draft-mode/enable'}},
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton

@@ -23,6 +23,12 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'image',
+      title: 'Obraz',
+      description: 'Obraz wyświetlany obok formularza kontaktowego.',
+      type: 'image',
+    }),
+    defineField({
       name: 'email',
       title: 'Adres e-mail',
       type: 'string',

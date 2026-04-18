@@ -1,10 +1,113 @@
-export default function Contact() {
+import ContactForm from '@/components/ContactForm'
+import {Header} from '@/components/Header'
+import SectionFullWidth from '@/components/SectionFullWidth'
+import {sanityFetch} from '@/sanity/lib/live'
+import {contactPageQuery} from '@/sanity/lib/queries'
+import {urlForImage} from '@/sanity/lib/utils'
+import Image from 'next/image'
+import Link from 'next/link'
+import type {Image as SanityImage} from 'sanity'
+
+export default async function Contact() {
+  const {data} = await sanityFetch({query: contactPageQuery})
+
+  const {
+    description = '',
+    title = '',
+    formDescription = '',
+    formTitle = '',
+    image,
+    email = '',
+    phone = '',
+    address,
+    socialLinks,
+  } = data ?? {}
+
+  const imageUrl = image
+    ? urlForImage(image as SanityImage)
+        ?.height(600)
+        .url()
+    : null
+
   return (
-    <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-      <p className="text-lg mb-8">
-        We would love to hear from you! Please reach out with any questions or inquiries.
-      </p>
+    <div className="space-y-8 md:space-y-12">
+      {title ? <Header title={title} description={description} /> : null}
+
+      <div className="flex flex-col md:flex-row justify-between gap-12">
+        <div className="w-full md:w-1/2">
+          <ContactForm title={formTitle} description={formDescription} />
+        </div>
+
+        <div className="relative h-[50dvh] md:h-auto w-full md:w-1/2">
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={'Contact Image'}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 75vw, 30vw"
+              fetchPriority="high"
+            />
+          ) : null}
+        </div>
+      </div>
+
+      <SectionFullWidth buttonHref="/offer" buttonText="Odkryj ofertę">
+        <div className="grid grid-cols-2 w-full sm:w-[50vw] md:w-[75vw] gap-6 md:flex-row md:gap-12 md:grid-rows-1 md:grid-cols-4">
+          <div className="flex flex-col gap-2">
+            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+              E-mail
+            </span>
+
+            <Link
+              href={`mailto:${email}`}
+              className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
+            >
+              {email}
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+              Telefon
+            </span>
+
+            <Link
+              href={`tel:${phone}`}
+              className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
+            >
+              {phone}
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+              Instagram
+            </span>
+
+            {socialLinks?.instagram ? (
+              <Link
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
+              >
+                @azymutlab
+              </Link>
+            ) : null}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="text-sm tracking-widest uppercase font-sans text-white/50">Adres</span>
+
+            <p className="text-sm font-sans text-white/70 leading-relaxed">
+              {address?.street}
+              <br />
+              {address?.postalCode ?? ''} {address?.city ?? ''}
+            </p>
+          </div>
+        </div>
+      </SectionFullWidth>
     </div>
   )
 }
