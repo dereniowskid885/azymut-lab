@@ -19,7 +19,8 @@ export default defineType({
       title: 'Opis',
       description:
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',
-      type: 'string',
+      type: 'text',
+      rows: 2,
       validation: (rule) => rule.required(),
     }),
     defineField({

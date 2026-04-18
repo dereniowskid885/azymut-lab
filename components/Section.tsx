@@ -11,7 +11,7 @@ export interface ISection {
 export default function Section({className = '', title, description, note, children}: ISection) {
   return (
     <section className={`space-y-8 md:space-y-12 ${className}`}>
-      <div className="space-y-2 md:w-5/6">
+      <div className="space-y-4 md:w-5/6">
         <p className="text-2xl md:text-4xl">{title}</p>
 
         {description ? <p className="text-md md:text-lg text-gray-500">{description}</p> : null}

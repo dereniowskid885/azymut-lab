@@ -22,6 +22,7 @@ export default defineType({
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',
       title: 'Description',
       type: 'text',
+      rows: 2,
       validation: (rule) => rule.required(),
     }),
     defineField({
