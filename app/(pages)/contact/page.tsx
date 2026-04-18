@@ -21,6 +21,8 @@ export default async function Contact() {
     phone = '',
     address,
     socialLinks,
+    ctaHref = '',
+    ctaButtonText = '',
   } = data ?? {}
 
   const imageUrl = image
@@ -52,40 +54,44 @@ export default async function Contact() {
         </div>
       </div>
 
-      <SectionFullWidth buttonHref="/offer" buttonText="Odkryj ofertę">
+      <SectionFullWidth buttonHref={ctaHref} buttonText={ctaButtonText}>
         <div className="grid grid-cols-2 w-full sm:w-[50vw] md:w-[75vw] gap-6 md:flex-row md:gap-12 md:grid-rows-1 md:grid-cols-4">
-          <div className="flex flex-col gap-2">
-            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
-              E-mail
-            </span>
+          {email ? (
+            <div className="flex flex-col gap-2">
+              <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+                E-mail
+              </span>
 
-            <Link
-              href={`mailto:${email}`}
-              className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
-            >
-              {email}
-            </Link>
-          </div>
+              <Link
+                href={`mailto:${email}`}
+                className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
+              >
+                {email}
+              </Link>
+            </div>
+          ) : null}
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
-              Telefon
-            </span>
+          {phone ? (
+            <div className="flex flex-col gap-2">
+              <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+                Telefon
+              </span>
 
-            <Link
-              href={`tel:${phone}`}
-              className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
-            >
-              {phone}
-            </Link>
-          </div>
+              <Link
+                href={`tel:${phone}`}
+                className="text-sm font-sans text-white/70 hover:text-white transition-colors border-b border-white/10 pb-0.5"
+              >
+                {phone}
+              </Link>
+            </div>
+          ) : null}
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm tracking-widest uppercase font-sans text-white/50">
-              Instagram
-            </span>
+          {socialLinks?.instagram ? (
+            <div className="flex flex-col gap-2">
+              <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+                Instagram
+              </span>
 
-            {socialLinks?.instagram ? (
               <Link
                 href={socialLinks.instagram}
                 target="_blank"
@@ -94,18 +100,22 @@ export default async function Contact() {
               >
                 @azymutlab
               </Link>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
-          <div className="flex flex-col gap-2">
-            <span className="text-sm tracking-widest uppercase font-sans text-white/50">Adres</span>
+          {address?.street && address.postalCode && address.city ? (
+            <div className="flex flex-col gap-2">
+              <span className="text-sm tracking-widest uppercase font-sans text-white/50">
+                Adres
+              </span>
 
-            <p className="text-sm font-sans text-white/70 leading-relaxed">
-              {address?.street}
-              <br />
-              {address?.postalCode ?? ''} {address?.city ?? ''}
-            </p>
-          </div>
+              <p className="text-sm font-sans text-white/70 leading-relaxed">
+                {address?.street}
+                <br />
+                {address?.postalCode ?? ''} {address?.city ?? ''}
+              </p>
+            </div>
+          ) : null}
         </div>
       </SectionFullWidth>
     </div>

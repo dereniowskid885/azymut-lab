@@ -24,27 +24,14 @@ export type Work = {
   _rev: string
   title?: string
   description?: string
-  intro?: string
+  introTitle?: string
+  introDescription?: string
   perks?: Array<{
     icon?: string
     title?: string
     description?: string
     _key: string
   }>
-  openPositions?: Array<{
-    position?: string
-    type?: 'uop' | 'b2b' | 'zlecenie' | 'staz'
-    experience?: 'junior' | 'mid' | 'senior'
-    description?: string
-    requirements?: Array<string>
-    isActive?: boolean
-    _key: string
-  }>
-  spontaneousApplication?: {
-    title?: string
-    description?: string
-    email?: string
-  }
 }
 
 export type SanityImageAssetReference = {
@@ -84,6 +71,8 @@ export type Contact = {
   }
   formTitle?: string
   formDescription?: string
+  ctaHref?: string
+  ctaButtonText?: string
 }
 
 export type SanityImageCrop = {
@@ -153,6 +142,8 @@ export type Offer = {
   }>
   ctaTitle?: string
   ctaDescription?: string
+  ctaHref?: string
+  ctaButtonText?: string
 }
 
 export type Settings = {
@@ -398,7 +389,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: offerPageQuery
-// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription  }
+// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
 export type OfferPageQueryResult = {
   _id: string
   _type: 'offer'
@@ -420,42 +411,13 @@ export type OfferPageQueryResult = {
   }> | null
   ctaTitle: string | null
   ctaDescription: string | null
-} | null
-
-// Source: sanity/lib/queries.ts
-// Variable: portfolioPageQuery
-// Query: *[_type == "portfolio"][0]{    _id,    _type,    title,    description,    projects[]{      _key,      title,      category,      location,      area,      year,      description,      images[]{        _key,        asset->{          _id,          url,          metadata{            dimensions          }        },        hotspot,        crop      }    }  }
-export type PortfolioPageQueryResult = {
-  _id: string
-  _type: 'portfolio'
-  title: string | null
-  description: string | null
-  projects: Array<{
-    _key: string
-    title: string | null
-    category: string | null
-    location: string | null
-    area: number | null
-    year: number | null
-    description: string | null
-    images: Array<{
-      _key: string
-      asset: {
-        _id: string
-        url: string | null
-        metadata: {
-          dimensions: SanityImageDimensions | null
-        } | null
-      } | null
-      hotspot: SanityImageHotspot | null
-      crop: SanityImageCrop | null
-    }> | null
-  }> | null
+  ctaHref: string | null
+  ctaButtonText: string | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: contactPageQuery
-// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription  }
+// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription,    ctaHref,    ctaButtonText  }
 export type ContactPageQueryResult = {
   _id: string
   _type: 'contact'
@@ -483,37 +445,26 @@ export type ContactPageQueryResult = {
   } | null
   formTitle: string | null
   formDescription: string | null
+  ctaHref: string | null
+  ctaButtonText: string | null
 } | null
 
 // Source: sanity/lib/queries.ts
 // Variable: workPageQuery
-// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    intro,    perks[]{      _key,      icon,      title,      description    },    openPositions[]{      _key,      position,      type,      experience,      description,      requirements,      isActive    },    spontaneousApplication{      title,      description,      email    }  }
+// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    introTitle,    introDescription,    perks[]{      _key,      icon,      title,      description    },  }
 export type WorkPageQueryResult = {
   _id: string
   _type: 'work'
   title: string | null
   description: string | null
-  intro: string | null
+  introTitle: string | null
+  introDescription: string | null
   perks: Array<{
     _key: string
     icon: string | null
     title: string | null
     description: string | null
   }> | null
-  openPositions: Array<{
-    _key: string
-    position: string | null
-    type: 'b2b' | 'staz' | 'uop' | 'zlecenie' | null
-    experience: 'junior' | 'mid' | 'senior' | null
-    description: string | null
-    requirements: Array<string> | null
-    isActive: boolean | null
-  }> | null
-  spontaneousApplication: {
-    title: string | null
-    description: string | null
-    email: string | null
-  } | null
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -525,10 +476,9 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
-    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription\n  }\n': OfferPageQueryResult
-    '\n  *[_type == "portfolio"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    projects[]{\n      _key,\n      title,\n      category,\n      location,\n      area,\n      year,\n      description,\n      images[]{\n        _key,\n        asset->{\n          _id,\n          url,\n          metadata{\n            dimensions\n          }\n        },\n        hotspot,\n        crop\n      }\n    }\n  }\n': PortfolioPageQueryResult
-    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription\n  }\n': ContactPageQueryResult
-    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    intro,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n    openPositions[]{\n      _key,\n      position,\n      type,\n      experience,\n      description,\n      requirements,\n      isActive\n    },\n    spontaneousApplication{\n      title,\n      description,\n      email\n    }\n  }\n': WorkPageQueryResult
+    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
+    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
+    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }

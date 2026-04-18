@@ -134,6 +134,18 @@ export default defineType({
       type: 'text',
       rows: 2,
     }),
+    defineField({
+      name: 'ctaHref',
+      title: 'Link CTA',
+      description: 'Nazwa linku podstrony np. /offer lub /contact',
+      type: 'string',
+    }),
+    defineField({
+      name: 'ctaButtonText',
+      title: 'Tekst przycisku CTA',
+      description: 'Tekst na przycisku',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

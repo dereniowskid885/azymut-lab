@@ -14,6 +14,8 @@ export default async function Offer() {
     services = [],
     ctaTitle = '',
     ctaDescription = '',
+    ctaButtonText = '',
+    ctaHref = '',
   } = data ?? {}
 
   return (
@@ -32,8 +34,8 @@ export default async function Offer() {
         </div>
       ))}
 
-      {ctaTitle && (
-        <SectionFullWidth buttonHref="/contact" buttonText="Napisz do nas">
+      {ctaTitle ? (
+        <SectionFullWidth buttonHref={ctaHref} buttonText={ctaButtonText}>
           <div className="space-y-4">
             <h2 className="text-2xl md:text-4xl text-white tracking-tight">{ctaTitle}</h2>
 
@@ -42,7 +44,7 @@ export default async function Offer() {
             )}
           </div>
         </SectionFullWidth>
-      )}
+      ) : null}
     </div>
   )
 }

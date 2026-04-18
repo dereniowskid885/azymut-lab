@@ -4,8 +4,8 @@ import {ReactNode} from 'react'
 export interface ISectionFullWidth {
   className?: string
   children: ReactNode
-  buttonHref: string
-  buttonText: string
+  buttonHref: string | null
+  buttonText: string | null
 }
 
 export default function SectionFullWidth({
@@ -20,9 +20,11 @@ export default function SectionFullWidth({
     >
       {children}
 
-      <Link href={buttonHref} className="action-button ml-auto">
-        {buttonText}
-      </Link>
+      {buttonHref && buttonText ? (
+        <Link href={buttonHref} className="action-button ml-auto">
+          {buttonText}
+        </Link>
+      ) : null}
     </section>
   )
 }

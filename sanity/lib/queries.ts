@@ -49,39 +49,41 @@ export const offerPageQuery = defineQuery(`
       }
     },
     ctaTitle,
-    ctaDescription
+    ctaDescription,
+    ctaHref,
+    ctaButtonText
   }
 `)
 
-export const portfolioPageQuery = defineQuery(`
-  *[_type == "portfolio"][0]{
-    _id,
-    _type,
-    title,
-    description,
-    projects[]{
-      _key,
-      title,
-      category,
-      location,
-      area,
-      year,
-      description,
-      images[]{
-        _key,
-        asset->{
-          _id,
-          url,
-          metadata{
-            dimensions
-          }
-        },
-        hotspot,
-        crop
-      }
-    }
-  }
-`)
+// export const portfolioPageQuery = defineQuery(`
+//   *[_type == "portfolio"][0]{
+//     _id,
+//     _type,
+//     title,
+//     description,
+//     projects[]{
+//       _key,
+//       title,
+//       category,
+//       location,
+//       area,
+//       year,
+//       description,
+//       images[]{
+//         _key,
+//         asset->{
+//           _id,
+//           url,
+//           metadata{
+//             dimensions
+//           }
+//         },
+//         hotspot,
+//         crop
+//       }
+//     }
+//   }
+// `)
 
 export const contactPageQuery = defineQuery(`
   *[_type == "contact"][0]{
@@ -104,7 +106,9 @@ export const contactPageQuery = defineQuery(`
       pinterest
     },
     formTitle,
-    formDescription
+    formDescription,
+    ctaHref,
+    ctaButtonText
   }
 `)
 
@@ -114,27 +118,12 @@ export const workPageQuery = defineQuery(`
     _type,
     title,
     description,
-    intro,
-    perks[]{
-      _key,
-      icon,
-      title,
-      description
-    },
-    openPositions[]{
-      _key,
-      position,
-      type,
-      experience,
-      description,
-      requirements,
-      isActive
-    },
-    spontaneousApplication{
-      title,
-      description,
-      email
-    }
+    introTitle,
+    introDescription,
+    ctaTitle,
+    ctaDescription,
+    ctaHref,
+    ctaButtonText
   }
 `)
 

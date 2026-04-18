@@ -48,7 +48,14 @@
         },
         "optional": true
       },
-      "intro": {
+      "introTitle": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "introDescription": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -94,136 +101,6 @@
                   }
                 }
               }
-            }
-          }
-        },
-        "optional": true
-      },
-      "openPositions": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "position": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "string",
-                      "value": "uop"
-                    },
-                    {
-                      "type": "string",
-                      "value": "b2b"
-                    },
-                    {
-                      "type": "string",
-                      "value": "zlecenie"
-                    },
-                    {
-                      "type": "string",
-                      "value": "staz"
-                    }
-                  ]
-                },
-                "optional": true
-              },
-              "experience": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "string",
-                      "value": "junior"
-                    },
-                    {
-                      "type": "string",
-                      "value": "mid"
-                    },
-                    {
-                      "type": "string",
-                      "value": "senior"
-                    }
-                  ]
-                },
-                "optional": true
-              },
-              "description": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "requirements": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "array",
-                  "of": {
-                    "type": "string"
-                  }
-                },
-                "optional": true
-              },
-              "isActive": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "boolean"
-                },
-                "optional": true
-              }
-            },
-            "rest": {
-              "type": "object",
-              "attributes": {
-                "_key": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "optional": true
-      },
-      "spontaneousApplication": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "title": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "description": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "email": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
             }
           }
         },
@@ -446,6 +323,20 @@
         "optional": true
       },
       "formDescription": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "ctaHref": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "ctaButtonText": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -881,6 +772,20 @@
         "optional": true
       },
       "ctaDescription": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "ctaHref": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "ctaButtonText": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
