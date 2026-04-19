@@ -3,32 +3,29 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'home',
-  title: 'Home',
+  title: 'Strona główna',
   type: 'document',
   icon: HomeIcon,
-  // Uncomment below to have edits publish automatically as you type
-  // liveEdit: true,
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your personal website.',
-      title: 'Title',
+      title: 'Tytuł',
+      description: 'Tytuł strony głównej wyświetlany w headerze.',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
-      title: 'Description',
+      title: 'Opis',
+      description: 'Tekst wyświetlany pod headerem.',
       type: 'text',
       rows: 2,
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'imagesCarousel',
-      title: 'Carousel Images',
-      description: 'These are the images that will appear in the carousel on your landing page.',
+      title: 'Karuzela',
+      description: 'Slider ze zdjęciami i tekstem',
       type: 'array',
       of: [
         defineArrayMember({
@@ -55,7 +52,8 @@ export default defineType({
             defineField({
               name: 'hoverText',
               title: 'Hover Text',
-              description: 'Text that appears when hovering over the element in the carousel.',
+              description:
+                'Tekst, który pojawia się po najechaniu myszką (desktop), lub jeśli jest widoczny (mobile).',
               type: 'text',
               rows: 3,
             }),
@@ -76,13 +74,9 @@ export default defineType({
     }),
   ],
   preview: {
-    select: {
-      title: 'title',
-    },
-    prepare({title}) {
+    prepare() {
       return {
-        subtitle: 'Home',
-        title,
+        title: 'Strona główna',
       }
     },
   },

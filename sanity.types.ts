@@ -26,12 +26,10 @@ export type Work = {
   description?: string
   introTitle?: string
   introDescription?: string
-  perks?: Array<{
-    icon?: string
-    title?: string
-    description?: string
-    _key: string
-  }>
+  ctaTitle?: string
+  ctaDescription?: string
+  ctaHref?: string
+  ctaButtonText?: string
 }
 
 export type SanityImageAssetReference = {
@@ -451,7 +449,7 @@ export type ContactPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: workPageQuery
-// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    introTitle,    introDescription,    perks[]{      _key,      icon,      title,      description    },  }
+// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    introTitle,    introDescription,    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
 export type WorkPageQueryResult = {
   _id: string
   _type: 'work'
@@ -459,12 +457,10 @@ export type WorkPageQueryResult = {
   description: string | null
   introTitle: string | null
   introDescription: string | null
-  perks: Array<{
-    _key: string
-    icon: string | null
-    title: string | null
-    description: string | null
-  }> | null
+  ctaTitle: string | null
+  ctaDescription: string | null
+  ctaHref: string | null
+  ctaButtonText: string | null
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -478,7 +474,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
     '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
     '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
-    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    perks[]{\n      _key,\n      icon,\n      title,\n      description\n    },\n  }\n': WorkPageQueryResult
+    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }

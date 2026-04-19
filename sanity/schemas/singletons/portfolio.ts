@@ -17,8 +17,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Opis',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
+      description: 'Tekst wyświetlany pod headerem.',
       type: 'text',
       rows: 2,
       validation: (rule) => rule.required(),
@@ -98,13 +97,9 @@ export default defineType({
     }),
   ],
   preview: {
-    select: {
-      title: 'title',
-    },
-    prepare({title}) {
+    prepare() {
       return {
-        subtitle: 'Portfolio',
-        title,
+        title: 'Portfolio',
       }
     },
   },

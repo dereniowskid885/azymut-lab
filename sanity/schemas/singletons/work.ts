@@ -1,5 +1,5 @@
 import {UsersIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'work',
@@ -17,8 +17,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Opis',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
+      description: 'Tekst wyświetlany pod headerem.',
       type: 'text',
       rows: 2,
       validation: (rule) => rule.required(),
@@ -26,51 +25,47 @@ export default defineType({
     defineField({
       name: 'introTitle',
       title: 'Tytuł',
-      description: 'Krótki tekst o kulturze pracy i wartościach studia Azymut Lab.',
+      description: 'Tytuł tekstu wyświetlanego w sekcji głównej podstrony.',
       type: 'text',
       rows: 1,
     }),
     defineField({
       name: 'introDescription',
       title: 'Opis',
-      description: 'Krótki tekst o kulturze pracy i wartościach studia Azymut Lab.',
+      description: 'Opis tekstu wyświetlanego w sekcji głównej podstrony.',
       type: 'text',
       rows: 4,
     }),
     defineField({
       name: 'ctaTitle',
       title: 'Tytuł CTA',
-      description: 'Nagłówek sekcji zachęcającej do kontaktu, np. "Zacznijmy razem".',
+      description: 'Nagłówek sekcji z czarnym tłem.',
       type: 'string',
     }),
     defineField({
       name: 'ctaDescription',
       title: 'Opis CTA',
-      description: 'Krótki tekst pod nagłówkiem CTA zachęcający do umówienia konsultacji.',
+      description: 'Krótki tekst pod nagłówkiem CTA.',
       type: 'text',
       rows: 2,
     }),
     defineField({
       name: 'ctaHref',
       title: 'Link CTA',
-      description: 'Nazwa linku podstrony np. /offer lub /contact',
+      description: 'Podstrona do której prowadzi kliknięcie w przycisk np. /oferta lub /kontakt.',
       type: 'string',
     }),
     defineField({
       name: 'ctaButtonText',
       title: 'Tekst przycisku CTA',
-      description: 'Tekst na przycisku',
+      description: 'Tekst na przycisku.',
       type: 'string',
     }),
   ],
   preview: {
-    select: {
-      title: 'title',
-    },
-    prepare({title}) {
+    prepare() {
       return {
-        subtitle: 'Praca',
-        title,
+        title: 'Praca',
       }
     },
   },

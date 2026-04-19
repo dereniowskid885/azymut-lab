@@ -1,10 +1,11 @@
 import '@/styles/index.css'
+import {CustomPortableText} from '@/components/CustomPortableText'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {homePageQuery, settingsQuery} from '@/sanity/lib/queries'
 import {urlForOpenGraphImage} from '@/sanity/lib/utils'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata, Viewport} from 'next'
-import {toPlainText, type PortableTextBlock} from 'next-sanity'
+import {type PortableTextBlock} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {draftMode} from 'next/headers'
 import {Toaster} from 'sonner'
@@ -48,11 +49,12 @@ export default async function IndexRoute({children}: {children: React.ReactNode}
         </div>
 
         <footer className="bottom-0 w-full bg-white py-2 text-center mt-4 md:mt-8">
-          {data?.footer?.map((block) => (
-            <p key={block._key} className="text-xs text-black">
-              {toPlainText(block as PortableTextBlock)}
-            </p>
-          ))}
+          {data?.footer ? (
+            <CustomPortableText
+              paragraphClasses="text-sm"
+              value={data.footer as unknown as PortableTextBlock[]}
+            />
+          ) : null}
         </footer>
       </div>
 

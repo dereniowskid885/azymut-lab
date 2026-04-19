@@ -36,7 +36,7 @@ export default function OfferSliderCard({
   return (
     <div
       ref={cardRef}
-      className={`relative w-[75vw] md:w-[33.33vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 transition duration-700 group h-full opacity-90 hover:opacity-100 ${
+      className={`relative w-[75vw] md:w-[33.33vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 transition duration-700 group h-full md:opacity-90 md:hover:opacity-100 ${
         isRecommended ? 'bg-[#1a1a18]' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'
       }`}
     >

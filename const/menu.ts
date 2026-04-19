@@ -6,17 +6,17 @@ export const menuObj = [
   },
   {
     id: 'nav-offer',
-    href: '/offer',
+    href: '/oferta',
     title: 'Oferta',
   },
   {
     id: 'nav-contact',
-    href: '/contact',
+    href: '/kontakt',
     title: 'Kontakt',
   },
   {
     id: 'nav-work',
-    href: '/work',
+    href: '/praca',
     title: 'Praca',
   },
 ]

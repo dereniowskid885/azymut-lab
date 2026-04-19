@@ -7,11 +7,13 @@ const serif = PT_Serif({
   subsets: ['latin'],
   weight: ['400', '700'],
 })
+
 const sans = Lato({
   variable: '--font-sans',
   subsets: ['latin'],
   weight: ['400', '700', '900'],
 })
+
 const mono = IBM_Plex_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
