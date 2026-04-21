@@ -40,7 +40,7 @@ export default async function Contact() {
           <ContactForm title={formTitle} description={formDescription} />
         </div>
 
-        <div className="relative h-[50dvh] md:h-auto w-full md:w-1/2">
+        <div className="relative h-[50vh] md:h-auto w-full md:w-1/2">
           {imageUrl ? (
             <Image
               src={imageUrl}
