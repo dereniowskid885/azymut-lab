@@ -41,6 +41,8 @@ export const offerPageQuery = defineQuery(`
       note,
       variants[]{
         _key,
+        image,
+        imageAlt,
         badge,
         name,
         isRecommended,

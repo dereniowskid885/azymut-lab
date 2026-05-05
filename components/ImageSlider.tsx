@@ -19,7 +19,7 @@ export default function ImageSlider({data}: IImageSlider) {
       {data.map((item, index) => {
         const imageUrl = item.image
           ? urlForImage(item.image as SanityImage)
-              ?.height(600)
+              ?.height(900)
               .url()
           : null
 

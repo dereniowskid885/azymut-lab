@@ -129,6 +129,14 @@ export type Offer = {
     description?: string
     note?: string
     variants?: Array<{
+      image?: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      imageAlt?: string
       badge?: string
       name?: string
       isRecommended?: boolean
@@ -387,7 +395,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: offerPageQuery
-// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
+// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        image,        imageAlt,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
 export type OfferPageQueryResult = {
   _id: string
   _type: 'offer'
@@ -400,6 +408,14 @@ export type OfferPageQueryResult = {
     note: string | null
     variants: Array<{
       _key: string
+      image: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      } | null
+      imageAlt: string | null
       badge: string | null
       name: string | null
       isRecommended: boolean | null
@@ -472,7 +488,7 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
-    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
+    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        image,\n        imageAlt,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
     '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
     '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult

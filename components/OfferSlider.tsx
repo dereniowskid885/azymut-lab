@@ -1,6 +1,8 @@
 'use client'
 
+import {urlForImage} from '@/sanity/lib/utils'
 import {TVariants} from '@/types/offer'
+import type {Image as SanityImage} from 'sanity'
 import Carousel from './Carousel'
 import OfferSliderCard from './OfferSliderCard'
 
@@ -14,7 +16,21 @@ export default function OfferSlider({data = []}: IOfferSlider) {
   return (
     <Carousel loop={false}>
       {data.map((item, index) => {
-        return <OfferSliderCard key={item._key} {...item} index={index} />
+        const imageUrl = item.image
+          ? urlForImage(item.image as SanityImage)
+              ?.height(900)
+              .url()
+          : null
+
+        return (
+          <OfferSliderCard
+            key={item._key}
+            {...item}
+            index={index}
+            imageUrl={imageUrl}
+            imageAlt={item.imageAlt}
+          />
+        )
       })}
     </Carousel>
   )

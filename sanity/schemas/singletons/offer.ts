@@ -62,18 +62,27 @@ export default defineType({
                   type: 'object',
                   fields: [
                     defineField({
+                      name: 'image',
+                      title: 'Zdjęcie',
+                      type: 'image',
+                      options: {hotspot: true},
+                    }),
+                    defineField({
+                      name: 'imageAlt',
+                      title: 'Tekst alternatywny dla zdjęcia',
+                      type: 'string',
+                    }),
+                    defineField({
                       name: 'badge',
                       title: 'Etykieta',
                       description: 'Np. "Podstawowa", "Rekomendowana", "Pod klucz".',
                       type: 'string',
-                      validation: (Rule) => Rule.required(),
                     }),
                     defineField({
                       name: 'name',
                       title: 'Nazwa wariantu',
                       description: 'Np. "Basic", "Extended", "Premium".',
                       type: 'string',
-                      validation: (Rule) => Rule.required(),
                     }),
                     defineField({
                       name: 'isRecommended',

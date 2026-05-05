@@ -35,10 +35,10 @@ export default function ImageSliderCard({
   return (
     <div
       ref={cardRef}
-      className={`relative w-[75vw] md:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 md:opacity-90 md:hover:opacity-100 transition duration-700 group h-full`}
+      className={`relative w-[75vw] md:w-[60vw] lg:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 md:opacity-90 md:hover:opacity-100 transition duration-700 group h-full`}
     >
       <div
-        className={`w-full h-full p-4 ${imageUrl ? '' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'}`}
+        className={`w-full h-full p-4 relative ${imageUrl ? '' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'}`}
       >
         {imageUrl ? (
           <>
@@ -47,7 +47,9 @@ export default function ImageSliderCard({
               alt={title || 'Carousel Image'}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 75vw, 30vw"
+              sizes="(max-width: 768px) 75vw, (max-width: 1024px) 60vw, 30vw"
+              priority={index < 2}
+              fetchPriority={index < 4 ? 'high' : 'auto'}
             />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
