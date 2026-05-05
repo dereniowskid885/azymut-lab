@@ -51,13 +51,13 @@ export async function Header(props: HeaderProps) {
 
       <hr className="border-gray-200 full-container-width" />
 
+      <Navbar />
+
       {description && (
-        <p className="text-md md:text-lg text-gray-500 md:w-5/6 lg:w-3/5 min-h-[120px] leading-relaxed">
+        <p className="text-md md:text-lg text-gray-500 md:w-5/6 lg:w-3/5 leading-relaxed">
           {description}
         </p>
       )}
-
-      <Navbar />
 
       <hr className="border-gray-200 full-container-width" />
     </div>
