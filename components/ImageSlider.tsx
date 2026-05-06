@@ -15,11 +15,11 @@ export default function ImageSlider({data}: IImageSlider) {
   if (!data?.length) return null
 
   return (
-    <Carousel>
+    <Carousel amountOfSlides={data.length}>
       {data.map((item, index) => {
         const imageUrl = item.image
           ? urlForImage(item.image as SanityImage)
-              ?.height(900)
+              ?.height(1400)
               .url()
           : null
 

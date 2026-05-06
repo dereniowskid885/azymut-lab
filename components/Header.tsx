@@ -54,7 +54,7 @@ export async function Header(props: HeaderProps) {
       <Navbar />
 
       {description && (
-        <p className="text-md md:text-lg text-gray-500 md:w-5/6 lg:w-3/5 leading-relaxed">
+        <p className="text-md md:text-lg text-gray-500 md:w-5/6 lg:w-3/5 leading-relaxed whitespace-pre-wrap">
           {description}
         </p>
       )}

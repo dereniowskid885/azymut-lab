@@ -14,7 +14,9 @@ export default function Section({className = '', title, description, note, child
       <div className="space-y-4 md:w-5/6">
         <p className="text-2xl md:text-4xl">{title}</p>
 
-        {description ? <p className="text-md md:text-lg text-gray-500">{description}</p> : null}
+        {description ? (
+          <p className="text-md md:text-lg text-gray-500 whitespace-pre-wrap">{description}</p>
+        ) : null}
 
         {note ? (
           <p className="text-md md:text-lg bg-warning-bg border-l-2 border-warning-border text-warning-text px-4 py-3 w-fit">

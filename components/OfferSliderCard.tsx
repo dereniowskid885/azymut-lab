@@ -41,7 +41,7 @@ export default function OfferSliderCard({
   return (
     <div
       ref={cardRef}
-      className={`relative w-[75vw] md:w-[33.33vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 transition duration-700 group h-full md:opacity-90 md:hover:opacity-100 ${
+      className={`relative w-[75vw] md:basis-1/3 md:flex-shrink-0 min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 transition duration-700 group h-full md:opacity-100 md:hover:opacity-90 z-10 ${
         imageUrl
           ? ''
           : isRecommended
