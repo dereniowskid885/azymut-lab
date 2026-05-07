@@ -14,6 +14,9 @@ export default function NavLink({href, label}: INavLink) {
   const [isActive, setIsActive] = useState(pathname === href)
 
   useEffect(() => {
+    console.log('pathname: ', pathname)
+    console.log('href: ', href)
+    console.log('check: ', pathname === href)
     setIsActive(pathname === href)
   }, [pathname, href])
 
