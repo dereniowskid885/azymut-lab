@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import {useEffect, useRef, useState} from 'react'
 
 export interface IImageSliderCard {
   imageUrl?: string | null
@@ -16,29 +15,12 @@ export default function ImageSliderCard({
   hoverText,
   index,
 }: IImageSliderCard) {
-  const cardRef = useRef(null)
-
-  const [isCardVisibleMobile, setCardVisibleMobile] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setCardVisibleMobile(entry.isIntersecting),
-      {
-        threshold: 0.8,
-      },
-    )
-
-    if (cardRef.current) observer.observe(cardRef.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <div
-      ref={cardRef}
-      className={`relative w-[75vw] md:w-[60vw] lg:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0 md:opacity-100 md:hover:opacity-90 transition duration-700 group h-full`}
+      className={`relative w-[75vw] md:w-[60vw] lg:w-[30vw] min-h-[240px] md:min-h-[360px] overflow-hidden flex-shrink-0  group h-full`}
     >
       <div
-        className={`w-full h-full p-4 relative ${imageUrl ? '' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'}`}
+        className={`w-full h-full p-4 relative opacity-100 hover:opacity-30 transition duration-700 ${imageUrl ? '' : index % 2 === 0 ? 'bg-studio-400' : 'bg-studio-600'}`}
       >
         {imageUrl ? (
           <>
@@ -61,13 +43,11 @@ export default function ImageSliderCard({
 
           {description && <p className="text-white/80 text-md">{description}</p>}
         </div>
-
-        <p
-          className={`absolute bottom-4 left-4 right-4 text-white text-xl leading-tight opacity-0 md:group-hover:opacity-100 transition duration-700 ${isCardVisibleMobile ? 'opacity-100 md:opacity-0' : ''}`}
-        >
-          {hoverText}
-        </p>
       </div>
+
+      <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 text-black -translate-y-1/2 text-xl leading-tight opacity-0 group-hover:opacity-100 transition duration-700 text-center pointer-events-none">
+        {hoverText}
+      </p>
     </div>
   )
 }
