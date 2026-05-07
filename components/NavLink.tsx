@@ -18,7 +18,7 @@ export default function NavLink({href, label}: INavLink) {
     console.log('href: ', href)
     console.log('check: ', pathname === href)
     setIsActive(pathname === href)
-  }, [pathname, href])
+  }, [pathname])
 
   return (
     <Link
