@@ -1,5 +1,5 @@
 import './globals.css'
-import {IBM_Plex_Mono, Lato, PT_Serif} from 'next/font/google'
+import {IBM_Plex_Mono, PT_Serif, Questrial} from 'next/font/google'
 
 const serif = PT_Serif({
   variable: '--font-serif',
@@ -8,10 +8,10 @@ const serif = PT_Serif({
   weight: ['400', '700'],
 })
 
-const sans = Lato({
+const sans = Questrial({
   variable: '--font-sans',
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
+  weight: ['400'],
 })
 
 const mono = IBM_Plex_Mono({
