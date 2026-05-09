@@ -1,7 +1,8 @@
-const {theme} = require('@sanity/demo/tailwind')
+import {theme} from '@sanity/demo/tailwind'
+import type {Config} from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -33,5 +34,13 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    plugin(({addVariant}) => {
+      // urządzenia z prawdziwym hoverem (mysz, trackpad)
+      addVariant('supports-hover', '@media (hover: hover) and (pointer: fine)')
+    }),
+  ],
 }
+
+export default config
