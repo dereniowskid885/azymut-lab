@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {useEffect, useState} from 'react'
 
 interface INavLink {
   href: string
@@ -11,14 +10,7 @@ interface INavLink {
 
 export default function NavLink({href, label}: INavLink) {
   const pathname = usePathname()
-  const [isActive, setIsActive] = useState(pathname === href)
-
-  useEffect(() => {
-    console.log('pathname: ', pathname)
-    console.log('href: ', href)
-    console.log('check: ', pathname === href)
-    setIsActive(pathname === href)
-  }, [pathname])
+  const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
     <Link
