@@ -24,12 +24,22 @@ export async function generateMetadata(): Promise<Metadata> {
     title: homePage?.title
       ? {
           template: `%s | ${homePage.title}`,
-          default: homePage.title || 'Personal website',
+          default: homePage.title || 'Azymut Lab - Wykończenia wnętrz pod klucz | Kraków',
         }
       : undefined,
-    description: homePage?.description,
+    description:
+      homePage?.description ||
+      'Studio architektoniczne Azymut Lab. Kompleksowe wykończenia wnętrz pod klucz w duchu nowoczesnego minimalizmu. Kraków.',
     openGraph: {
       images: ogImage ? [ogImage] : [],
+      type: 'website',
+      locale: 'pl_PL',
+      siteName: 'Azymut Lab',
+    },
+    metadataBase: new URL('https://azymutlab.com'),
+    robots: {
+      index: true,
+      follow: true,
     },
   }
 }

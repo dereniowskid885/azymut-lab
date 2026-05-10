@@ -4,6 +4,21 @@ import Section from '@/components/Section'
 import SectionFullWidth from '@/components/SectionFullWidth'
 import {sanityFetch} from '@/sanity/lib/live'
 import {offerPageQuery} from '@/sanity/lib/queries'
+import type {Metadata} from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data} = await sanityFetch({query: offerPageQuery, stega: false})
+
+  return {
+    title: data?.title ?? 'Oferta',
+    description: data?.description ?? '',
+    openGraph: {
+      title: data?.title ?? 'Oferta',
+      description: data?.description ?? '',
+      url: 'https://azymutlab.com/oferta',
+    },
+  }
+}
 
 export default async function Offer() {
   const {data} = await sanityFetch({query: offerPageQuery})

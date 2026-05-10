@@ -4,9 +4,24 @@ import SectionFullWidth from '@/components/SectionFullWidth'
 import {sanityFetch} from '@/sanity/lib/live'
 import {contactPageQuery} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
+import type {Metadata} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import type {Image as SanityImage} from 'sanity'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data} = await sanityFetch({query: contactPageQuery, stega: false})
+
+  return {
+    title: data?.title ?? 'Kontakt',
+    description: data?.description ?? '',
+    openGraph: {
+      title: data?.title ?? 'Kontakt',
+      description: data?.description ?? '',
+      url: 'https://azymutlab.com/kontakt',
+    },
+  }
+}
 
 export default async function Contact() {
   const {data} = await sanityFetch({query: contactPageQuery})

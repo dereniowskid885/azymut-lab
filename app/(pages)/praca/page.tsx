@@ -3,6 +3,21 @@ import Section from '@/components/Section'
 import SectionFullWidth from '@/components/SectionFullWidth'
 import {sanityFetch} from '@/sanity/lib/live'
 import {workPageQuery} from '@/sanity/lib/queries'
+import type {Metadata} from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data} = await sanityFetch({query: workPageQuery, stega: false})
+
+  return {
+    title: data?.title ?? 'Praca',
+    description: data?.description ?? '',
+    openGraph: {
+      title: data?.title ?? 'Praca',
+      description: data?.description ?? '',
+      url: 'https://azymutlab.com/praca',
+    },
+  }
+}
 
 export default async function Work() {
   const {data} = await sanityFetch({query: workPageQuery})
