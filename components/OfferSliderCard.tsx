@@ -83,7 +83,7 @@ export default function OfferSliderCard({
           ) : null}
 
           {name ? (
-            <h3 className="text-white text-2xl font-bold font-sans leading-tight">{name}</h3>
+            <p className="text-white text-2xl font-bold font-sans leading-tight">{name}</p>
           ) : null}
         </div>
 

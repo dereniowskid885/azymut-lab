@@ -47,7 +47,7 @@ export default async function Contact() {
   const imageUrl = urlBuilder?.height(1400).url()
 
   return (
-    <div className="space-y-8 md:space-y-12">
+    <main className="space-y-8 md:space-y-12">
       {title ? <Header title={title} description={description} /> : null}
 
       <div className="flex flex-col md:flex-row justify-between gap-12">
@@ -137,6 +137,6 @@ export default async function Contact() {
           ) : null}
         </div>
       </SectionFullWidth>
-    </div>
+    </main>
   )
 }

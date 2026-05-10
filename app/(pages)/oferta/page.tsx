@@ -34,7 +34,7 @@ export default async function Offer() {
   } = data ?? {}
 
   return (
-    <div className="space-y-8 md:space-y-12">
+    <main className="space-y-8 md:space-y-12">
       {title ? <Header title={title} description={description} /> : null}
 
       {services?.map((service, index) => (
@@ -60,6 +60,6 @@ export default async function Offer() {
           </div>
         </SectionFullWidth>
       ) : null}
-    </div>
+    </main>
   )
 }

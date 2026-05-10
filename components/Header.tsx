@@ -42,6 +42,7 @@ export async function Header(props: HeaderProps) {
               height={93}
               sizes="(max-width: 768px) 80px, 120px"
               className="w-20 md:w-[120px]"
+              fetchPriority="high"
             />
           </Link>
         )}
@@ -52,7 +53,7 @@ export async function Header(props: HeaderProps) {
       <Navbar />
 
       {description && (
-        <p className="text-md md:text-lg text-gray-500 md:w-5/6 lg:w-3/5 leading-relaxed whitespace-pre-wrap">
+        <p className="text-md md:text-lg text-gray-600 md:w-5/6 lg:w-3/5 leading-relaxed whitespace-pre-wrap">
           {description}
         </p>
       )}

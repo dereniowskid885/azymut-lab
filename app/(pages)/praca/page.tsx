@@ -43,7 +43,7 @@ export default async function Work() {
   const imageUrl = urlBuilder?.height(1400).url()
 
   return (
-    <div className="space-y-8 md:space-y-12 flex flex-col flex-grow justify-between">
+    <main className="space-y-8 md:space-y-12 flex flex-col flex-grow justify-between">
       <div className="space-y-8 md:space-y-12">
         {title ? <Header title={title} description={description} /> : null}
 
@@ -80,6 +80,6 @@ export default async function Work() {
           </SectionFullWidth>
         )}
       </div>
-    </div>
+    </main>
   )
 }

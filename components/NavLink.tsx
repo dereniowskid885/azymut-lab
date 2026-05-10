@@ -15,7 +15,7 @@ export default function NavLink({href, label}: INavLink) {
   return (
     <Link
       href={href}
-      className={`text-lg hover:text-black md:text-xl tracking-widest transition ${isActive ? 'text-black font-bold' : 'text-gray-500'}`}
+      className={`text-lg hover:text-black md:text-xl tracking-widest transition ${isActive ? 'text-black font-bold' : 'text-gray-600'}`}
     >
       {label}
     </Link>

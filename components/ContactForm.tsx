@@ -98,7 +98,7 @@ export default function ContactForm({title, description, contactFormEmail}: ICon
     }
   }
 
-  const labelClass = 'text-sm tracking-widest uppercase text-gray-400'
+  const labelClass = 'text-sm tracking-widest uppercase text-gray-600'
 
   return (
     <Section title={title} description={description}>
@@ -212,7 +212,7 @@ export default function ContactForm({title, description, contactFormEmail}: ICon
         </div>
 
         <div className="flex justify-between items-center gap-6">
-          <p className="text-sm font-sans text-gray-400 leading-relaxed max-w-[200px]">
+          <p className="text-sm font-sans text-gray-600 leading-relaxed max-w-[200px]">
             Dane są przetwarzane zgodnie z polityką prywatności i nie są udostępniane osobom
             trzecim.
           </p>
