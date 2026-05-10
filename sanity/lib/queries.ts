@@ -129,6 +129,7 @@ export const contactPageQuery = defineQuery(`
     },
     imageAlt,
     email,
+    contactFormEmail,
     phone,
     address{
       street,

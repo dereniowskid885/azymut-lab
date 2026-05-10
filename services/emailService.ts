@@ -1,5 +1,6 @@
 'use server'
 
+import {contactEmailTemplate} from '@/helpers/email'
 import {Resend} from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -12,13 +13,13 @@ export const sendEmail = async (
   message: string,
   sender: string,
 ) => {
-  if (message.length < 0) return
+  if (message.length < 10) return
 
   const {error} = await resend.emails.send({
     from: `${sender} <onboarding@resend.dev>`,
     to: email,
     subject: subject,
-    html: `<div class="flex gap-3"><h3>${fullName}</h3><p>Phone number: ${phone}</p><p>${message}</p></div>`,
+    html: contactEmailTemplate({fullName, subject, sender, phone, message}),
   })
 
   return {success: !error}

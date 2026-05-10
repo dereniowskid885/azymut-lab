@@ -1,4 +1,4 @@
-import ContactForm from '@/components/ContactForm'
+import ContactSection from '@/components/ContactSection'
 import {Header} from '@/components/Header'
 import SectionFullWidth from '@/components/SectionFullWidth'
 import {sanityFetch} from '@/sanity/lib/live'
@@ -34,6 +34,7 @@ export default async function Contact() {
     image,
     imageAlt,
     email = '',
+    contactFormEmail = '',
     phone = '',
     address,
     socialLinks,
@@ -51,7 +52,11 @@ export default async function Contact() {
 
       <div className="flex flex-col md:flex-row justify-between gap-12">
         <div className="w-full md:w-1/2">
-          <ContactForm title={formTitle} description={formDescription} />
+          <ContactSection
+            title={formTitle}
+            description={formDescription}
+            contactFormEmail={contactFormEmail}
+          />
         </div>
 
         <div className="relative h-[50vh] md:h-auto w-full md:w-1/2">

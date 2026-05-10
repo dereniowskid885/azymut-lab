@@ -40,6 +40,12 @@ export default defineType({
       validation: (rule) => rule.required().email(),
     }),
     defineField({
+      name: 'contactFormEmail',
+      title: 'Adres e-mail na który będą wysyłane wiadomości z formularza kontaktowego',
+      type: 'string',
+      validation: (rule) => rule.email(),
+    }),
+    defineField({
       name: 'phone',
       title: 'Numer telefonu',
       type: 'string',
