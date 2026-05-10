@@ -158,6 +158,7 @@ export default function ContactForm({title, description, contactFormEmail}: ICon
             value={formData.phone}
             onChange={handleChange}
             placeholder="+48 000 000 000"
+            maxLength={20}
             className="bg-transparent border-0 border-b border-gray-200 py-2 text-sm font-sans text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-gray-400 transition-colors"
           />
 
