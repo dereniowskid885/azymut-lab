@@ -20,6 +20,7 @@ export default function ImageSliderCard({
   imageAlt,
 }: IImageSliderCard) {
   const [tapped, setTapped] = useState(false)
+  const [isInitialTap, setIsInitialTap] = useState(true)
 
   const handleTouchEnd = (e: any) => {
     const touch = e.changedTouches[0]
@@ -29,6 +30,7 @@ export default function ImageSliderCard({
     if (deltaX > 10 || deltaY > 10) return
 
     setTapped((prev) => !prev)
+    setIsInitialTap(false)
   }
 
   const handleTouchStart = (e: any) => {
@@ -81,6 +83,16 @@ export default function ImageSliderCard({
 
           {description && <p className="text-white/80 text-md">{description}</p>}
         </div>
+
+        {index === 0 && isInitialTap ? (
+          <div className="absolute bottom-4 right-4 md:hidden">
+            <img
+              src="/icons/touch.svg"
+              className="w-[24px] h-[24px] animate-ping"
+              alt="Dotknij, aby zobaczyć szczegóły"
+            />
+          </div>
+        ) : null}
       </div>
 
       <p
