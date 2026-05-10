@@ -37,7 +37,6 @@ const config: Config = {
   plugins: [
     require('@tailwindcss/typography'),
     plugin(({addVariant}) => {
-      // urządzenia z prawdziwym hoverem (mysz, trackpad)
       addVariant('supports-hover', '@media (hover: hover) and (pointer: fine)')
     }),
   ],

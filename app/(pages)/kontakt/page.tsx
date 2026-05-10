@@ -3,11 +3,11 @@ import {Header} from '@/components/Header'
 import SectionFullWidth from '@/components/SectionFullWidth'
 import {sanityFetch} from '@/sanity/lib/live'
 import {contactPageQuery} from '@/sanity/lib/queries'
-import {urlForImage} from '@/sanity/lib/utils'
+import {parseSanityImage} from '@/sanity/lib/utils'
+import {SanityImage} from '@/types/image'
 import type {Metadata} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import type {Image as SanityImage} from 'sanity'
 
 export async function generateMetadata(): Promise<Metadata> {
   const {data} = await sanityFetch({query: contactPageQuery, stega: false})
@@ -32,6 +32,7 @@ export default async function Contact() {
     formDescription = '',
     formTitle = '',
     image,
+    imageAlt,
     email = '',
     phone = '',
     address,
@@ -40,11 +41,9 @@ export default async function Contact() {
     ctaButtonText = '',
   } = data ?? {}
 
-  const imageUrl = image
-    ? urlForImage(image as SanityImage)
-        ?.height(600)
-        .url()
-    : null
+  const {urlBuilder} = parseSanityImage(image as SanityImage)
+
+  const imageUrl = urlBuilder?.height(600).url()
 
   return (
     <div className="space-y-8 md:space-y-12">
@@ -59,7 +58,7 @@ export default async function Contact() {
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={'Contact Image'}
+              alt={imageAlt || 'Zdjęcie formularza kontaktowego'}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 75vw, 30vw"

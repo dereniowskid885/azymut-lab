@@ -29,6 +29,11 @@ export default defineType({
       type: 'image',
     }),
     defineField({
+      name: 'imageAlt',
+      title: 'Opis zdjęcia (alt)',
+      type: 'string',
+    }),
+    defineField({
       name: 'email',
       title: 'Adres e-mail',
       type: 'string',

@@ -8,7 +8,16 @@ export const homePageQuery = defineQuery(`
       _key,
       _id,
       _type,
-      image,
+      image{
+        ...,
+        asset->{
+          ...,
+          metadata{
+            lqip
+          }
+        }
+      },
+      imageAlt,
       title,
       description,
       link,
@@ -24,7 +33,15 @@ export const settingsQuery = defineQuery(`
     _id,
     _type,
     footer,
-    logoImage,
+    logoImage{
+      ...,
+      asset->{
+        ...,
+        metadata{
+          lqip
+        }
+      }
+    },
   }
 `)
 
@@ -41,7 +58,15 @@ export const offerPageQuery = defineQuery(`
       note,
       variants[]{
         _key,
-        image,
+        image{
+          ...,
+          asset->{
+            ...,
+            metadata{
+              lqip
+            }
+          }
+        },
         imageAlt,
         badge,
         name,
@@ -93,7 +118,16 @@ export const contactPageQuery = defineQuery(`
     _type,
     title,
     description,
-    image,
+    image{
+      ...,
+      asset->{
+        ...,
+        metadata{
+          lqip
+        }
+      }
+    },
+    imageAlt,
     email,
     phone,
     address{

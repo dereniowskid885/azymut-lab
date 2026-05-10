@@ -38,6 +38,11 @@ export default defineType({
               options: {hotspot: true},
             }),
             defineField({
+              name: 'imageAlt',
+              title: 'Opis zdjęcia (alt)',
+              type: 'string',
+            }),
+            defineField({
               name: 'title',
               title: 'Tytuł',
               type: 'string',

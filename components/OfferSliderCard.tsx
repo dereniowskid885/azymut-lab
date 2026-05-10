@@ -1,3 +1,4 @@
+import {ISanityImageObject} from '@/types/image'
 import Image from 'next/image'
 import {useEffect, useRef, useState} from 'react'
 
@@ -8,7 +9,7 @@ export interface IOfferSliderCard {
   items: string[] | null
   note: string | null
   index: number
-  imageUrl?: string | null
+  image: ISanityImageObject
   imageAlt?: string | null
 }
 
@@ -19,7 +20,7 @@ export default function OfferSliderCard({
   items,
   note,
   index,
-  imageUrl,
+  image,
   imageAlt,
 }: IOfferSliderCard) {
   const cardRef = useRef(null)
@@ -38,6 +39,8 @@ export default function OfferSliderCard({
     return () => observer.disconnect()
   }, [])
 
+  const imageUrl = image.urlBuilder?.height(1400).url()
+
   return (
     <div
       ref={cardRef}
@@ -55,12 +58,14 @@ export default function OfferSliderCard({
         <>
           <Image
             src={imageUrl}
-            alt={imageAlt || 'Offer Carousel Image'}
+            alt={imageAlt || 'Zdjęcie realizacji wnętrza'}
             fill
             className="object-cover -z-50"
             sizes="(max-width: 768px) 75vw, (max-width: 1024px) 60vw, 30vw"
             priority={index < 2}
             fetchPriority={index < 4 ? 'high' : 'auto'}
+            placeholder={image.blurDataURL ? 'blur' : undefined}
+            blurDataURL={image.blurDataURL || undefined}
           />
 
           <div className="absolute inset-0 bg-black/40" />

@@ -1,20 +1,23 @@
+import {ISanityImageObject} from '@/types/image'
 import Image from 'next/image'
 import {useEffect, useState} from 'react'
 
 export interface IImageSliderCard {
-  imageUrl?: string | null
   title: string | null
   description: string | null
   hoverText: string | null
   index: number
+  image: ISanityImageObject
+  imageAlt?: string | null
 }
 
 export default function ImageSliderCard({
-  imageUrl,
   title,
   description,
   hoverText,
   index,
+  image,
+  imageAlt,
 }: IImageSliderCard) {
   const [tapped, setTapped] = useState(false)
 
@@ -44,6 +47,8 @@ export default function ImageSliderCard({
     return () => clearTimeout(tappedTimeout)
   }, [tapped])
 
+  const imageUrl = image.urlBuilder?.height(1400).url()
+
   return (
     <div
       className={`relative w-[75vw] md:w-[60vw] lg:w-[30vw] min-h-[320px] md:min-h-[360px] overflow-hidden flex-shrink-0 group h-full`}
@@ -57,12 +62,14 @@ export default function ImageSliderCard({
           <>
             <Image
               src={imageUrl}
-              alt={title || 'Carousel Image'}
+              alt={imageAlt || 'Zdjęcie realizacji wnętrza'}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 75vw, (max-width: 1024px) 60vw, 30vw"
               priority={index < 2}
               fetchPriority={index < 4 ? 'high' : 'auto'}
+              placeholder={image.blurDataURL ? 'blur' : undefined}
+              blurDataURL={image.blurDataURL || undefined}
             />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />

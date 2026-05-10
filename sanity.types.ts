@@ -201,6 +201,7 @@ export type Home = {
       crop?: SanityImageCrop
       _type: 'image'
     }
+    imageAlt?: string
     title?: string
     description?: string
     hoverText?: string
@@ -336,7 +337,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "home"][0]{    _id,    _type,    imagesCarousel[]{      _key,      _id,      _type,      image,      title,      description,      link,      hoverText    },    title,    description  }
+// Query: *[_type == "home"][0]{    _id,    _type,    imagesCarousel[]{      _key,      _id,      _type,      image{        ...,        asset->{          ...,          metadata{            lqip          }        }      },      imageAlt,      title,      description,      link,      hoverText    },    title,    description  }
 export type HomePageQueryResult = {
   _id: string
   _type: 'home'
@@ -345,12 +346,36 @@ export type HomePageQueryResult = {
     _id: null
     _type: null
     image: {
-      asset?: SanityImageAssetReference
+      asset: {
+        _id: string
+        _type: 'sanity.imageAsset'
+        _createdAt: string
+        _updatedAt: string
+        _rev: string
+        originalFilename?: string
+        label?: string
+        title?: string
+        description?: string
+        altText?: string
+        sha1hash?: string
+        extension?: string
+        mimeType?: string
+        size?: number
+        assetId?: string
+        uploadId?: string
+        path?: string
+        url?: string
+        metadata: {
+          lqip: string | null
+        } | null
+        source?: SanityAssetSourceData
+      } | null
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
       _type: 'image'
     } | null
+    imageAlt: string | null
     title: string | null
     description: string | null
     link: string | null
@@ -362,7 +387,7 @@ export type HomePageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    logoImage,  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    logoImage{      ...,      asset->{        ...,        metadata{          lqip        }      }    },  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -385,7 +410,30 @@ export type SettingsQueryResult = {
     _key: string
   }> | null
   logoImage: {
-    asset?: SanityImageAssetReference
+    asset: {
+      _id: string
+      _type: 'sanity.imageAsset'
+      _createdAt: string
+      _updatedAt: string
+      _rev: string
+      originalFilename?: string
+      label?: string
+      title?: string
+      description?: string
+      altText?: string
+      sha1hash?: string
+      extension?: string
+      mimeType?: string
+      size?: number
+      assetId?: string
+      uploadId?: string
+      path?: string
+      url?: string
+      metadata: {
+        lqip: string | null
+      } | null
+      source?: SanityAssetSourceData
+    } | null
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -395,7 +443,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: offerPageQuery
-// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        image,        imageAlt,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
+// Query: *[_type == "offer"][0]{    _id,    _type,    title,    description,    services[]{      _key,      title,      description,      note,      variants[]{        _key,        image{          ...,          asset->{            ...,            metadata{              lqip            }          }        },        imageAlt,        badge,        name,        isRecommended,        items,        note      }    },    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
 export type OfferPageQueryResult = {
   _id: string
   _type: 'offer'
@@ -409,7 +457,30 @@ export type OfferPageQueryResult = {
     variants: Array<{
       _key: string
       image: {
-        asset?: SanityImageAssetReference
+        asset: {
+          _id: string
+          _type: 'sanity.imageAsset'
+          _createdAt: string
+          _updatedAt: string
+          _rev: string
+          originalFilename?: string
+          label?: string
+          title?: string
+          description?: string
+          altText?: string
+          sha1hash?: string
+          extension?: string
+          mimeType?: string
+          size?: number
+          assetId?: string
+          uploadId?: string
+          path?: string
+          url?: string
+          metadata: {
+            lqip: string | null
+          } | null
+          source?: SanityAssetSourceData
+        } | null
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
@@ -431,14 +502,37 @@ export type OfferPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: contactPageQuery
-// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image,    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription,    ctaHref,    ctaButtonText  }
+// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image{      ...,      asset->{        ...,        metadata{          lqip        }      }    },    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription,    ctaHref,    ctaButtonText  }
 export type ContactPageQueryResult = {
   _id: string
   _type: 'contact'
   title: string | null
   description: string | null
   image: {
-    asset?: SanityImageAssetReference
+    asset: {
+      _id: string
+      _type: 'sanity.imageAsset'
+      _createdAt: string
+      _updatedAt: string
+      _rev: string
+      originalFilename?: string
+      label?: string
+      title?: string
+      description?: string
+      altText?: string
+      sha1hash?: string
+      extension?: string
+      mimeType?: string
+      size?: number
+      assetId?: string
+      uploadId?: string
+      path?: string
+      url?: string
+      metadata: {
+        lqip: string | null
+      } | null
+      source?: SanityAssetSourceData
+    } | null
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -486,10 +580,10 @@ export type SlugsByTypeQueryResult = Array<never>
 
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage,\n  }\n': SettingsQueryResult
-    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        image,\n        imageAlt,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
-    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image,\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
+    '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image{\n        ...,\n        asset->{\n          ...,\n          metadata{\n            lqip\n          }\n        }\n      },\n      imageAlt,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n  }\n': SettingsQueryResult
+    '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        image{\n          ...,\n          asset->{\n            ...,\n            metadata{\n              lqip\n            }\n          }\n        },\n        imageAlt,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
+    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
     '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }

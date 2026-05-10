@@ -1,9 +1,9 @@
 'use client'
 
 import {HomePageQueryResult} from '@/sanity.types'
-import {urlForImage} from '@/sanity/lib/utils'
+import {parseSanityImage} from '@/sanity/lib/utils'
+import {SanityImage} from '@/types/image'
 import Link from 'next/link'
-import type {Image as SanityImage} from 'sanity'
 import Carousel from './Carousel'
 import ImageSliderCard from './ImageSliderCard'
 
@@ -17,19 +17,16 @@ export default function ImageSlider({data}: IImageSlider) {
   return (
     <Carousel amountOfSlides={data.length}>
       {data.map((item, index) => {
-        const imageUrl = item.image
-          ? urlForImage(item.image as SanityImage)
-              ?.height(1400)
-              .url()
-          : null
+        const image = parseSanityImage(item.image as SanityImage)
 
         const card = (
           <ImageSliderCard
-            imageUrl={imageUrl}
             title={item.title}
             description={item.description}
             hoverText={item.hoverText}
             index={index}
+            image={image}
+            imageAlt={item.imageAlt}
           />
         )
 

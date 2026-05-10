@@ -69,7 +69,7 @@ export default defineType({
                     }),
                     defineField({
                       name: 'imageAlt',
-                      title: 'Tekst alternatywny dla zdjęcia',
+                      title: 'Opis zdjęcia (alt)',
                       type: 'string',
                     }),
                     defineField({

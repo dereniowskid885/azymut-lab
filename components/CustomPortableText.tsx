@@ -1,7 +1,7 @@
-import {urlForImage} from '@/sanity/lib/utils'
+import {parseSanityImage} from '@/sanity/lib/utils'
+import {SanityImage} from '@/types/image'
 import {PortableText, type PortableTextBlock, type PortableTextComponents} from 'next-sanity'
 import Image from 'next/image'
-import type {Image as SanityImage} from 'sanity'
 
 export function CustomPortableText({
   paragraphClasses,
@@ -31,12 +31,20 @@ export function CustomPortableText({
     },
     types: {
       image: ({value}: {value: SanityImage & {alt?: string; caption?: string}}) => {
-        const imageUrl = value ? urlForImage(value)?.height(600).url() : null
+        const {urlBuilder, blurDataURL} = parseSanityImage(value)
+
+        const imageUrl = urlBuilder?.height(600).url()
 
         return (
           <div className="my-6 space-y-2">
             {imageUrl ? (
-              <Image src={imageUrl} alt={'image'} className="relative aspect-[16/9]" />
+              <Image
+                src={imageUrl}
+                alt={value?.alt || 'Zdjęcie do artykułu'}
+                className="relative aspect-[16/9]"
+                placeholder={blurDataURL ? 'blur' : undefined}
+                blurDataURL={blurDataURL || undefined}
+              />
             ) : null}
 
             {value?.caption && (

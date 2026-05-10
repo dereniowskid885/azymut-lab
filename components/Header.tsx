@@ -1,9 +1,9 @@
 import {sanityFetch} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
-import {urlForImage} from '@/sanity/lib/utils'
+import {parseSanityImage} from '@/sanity/lib/utils'
+import {SanityImage} from '@/types/image'
 import Image from 'next/image'
 import Link from 'next/link'
-import type {Image as IImage} from 'sanity'
 import Navbar from './Navbar'
 
 interface HeaderProps {
@@ -19,12 +19,10 @@ export async function Header(props: HeaderProps) {
   }
 
   const {data} = await sanityFetch({query: settingsQuery})
-  const logoUrl = data?.logoImage
-    ? urlForImage(data.logoImage as IImage)
-        ?.width(120)
-        .height(93)
-        .url()
-    : ''
+
+  const {urlBuilder} = parseSanityImage(data?.logoImage as SanityImage)
+
+  const logoUrl = urlBuilder?.width(120).height(93).url()
 
   return (
     <div className="space-y-4 md:space-y-8">
@@ -39,7 +37,7 @@ export async function Header(props: HeaderProps) {
           <Link href="/">
             <Image
               src={logoUrl}
-              alt="Logo"
+              alt="Logo Azymut Lab - studio projektowe z Krakowa"
               width={120}
               height={93}
               sizes="(max-width: 768px) 80px, 120px"

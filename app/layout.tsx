@@ -26,13 +26,13 @@ const structuredData = {
   'name': 'Azymut Lab',
   'description': 'Studio architektoniczne. Wykończenia wnętrz pod klucz w Krakowie.',
   'url': 'https://azymutlab.com',
-  'telephone': '+48000000000',
+  'telephone': '+48 500724192',
   'email': 'hello@azymutlab.com',
   'address': {
     '@type': 'PostalAddress',
-    'streetAddress': 'ul. Przykładowa 12',
+    'streetAddress': 'ul. Sebastiana Klonowica 6',
     'addressLocality': 'Kraków',
-    'postalCode': '00-000',
+    'postalCode': '30-654',
     'addressCountry': 'PL',
   },
   'areaServed': {

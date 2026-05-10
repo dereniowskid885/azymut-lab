@@ -1,21 +1,23 @@
 import {dataset, projectId} from '@/sanity/lib/api'
+import {ISanityImageObject, SanityImage} from '@/types/image'
 import {createImageUrlBuilder} from '@sanity/image-url'
-import type {Image} from 'sanity'
 
 const imageBuilder = createImageUrlBuilder({
   projectId: projectId || '',
   dataset: dataset || '',
 })
 
-export const urlForImage = (source: Image | null | undefined) => {
-  // Ensure that source image contains a valid reference
-  if (!source?.asset?._ref) {
-    return undefined
+export const parseSanityImage = (source: SanityImage | null | undefined): ISanityImageObject => {
+  if (!source?.asset) {
+    return {}
   }
 
-  return imageBuilder?.image(source).auto('format').fit('max')
+  return {
+    urlBuilder: imageBuilder?.image(source).auto('format').fit('max'),
+    blurDataURL: source.asset.metadata?.lqip,
+  }
 }
 
-export function urlForOpenGraphImage(image: Image | null | undefined) {
-  return urlForImage(image)?.width(1200).height(627).fit('crop').url()
+export function urlForOpenGraphImage(image: SanityImage | null | undefined) {
+  return parseSanityImage(image).urlBuilder?.width(1200).height(627).fit('crop').url()
 }
