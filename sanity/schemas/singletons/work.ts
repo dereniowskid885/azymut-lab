@@ -23,6 +23,17 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'image',
+      title: 'Obraz',
+      description: 'Obraz wyświetlany obok tekstu w sekcji głównej podstrony.',
+      type: 'image',
+    }),
+    defineField({
+      name: 'imageAlt',
+      title: 'Opis zdjęcia (alt)',
+      type: 'string',
+    }),
+    defineField({
       name: 'introTitle',
       title: 'Tytuł',
       description: 'Tytuł tekstu wyświetlanego w sekcji głównej podstrony.',

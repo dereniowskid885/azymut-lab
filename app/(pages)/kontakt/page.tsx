@@ -43,7 +43,7 @@ export default async function Contact() {
 
   const {urlBuilder} = parseSanityImage(image as SanityImage)
 
-  const imageUrl = urlBuilder?.height(600).url()
+  const imageUrl = urlBuilder?.height(1400).url()
 
   return (
     <div className="space-y-8 md:space-y-12">

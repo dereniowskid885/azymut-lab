@@ -154,6 +154,16 @@ export const workPageQuery = defineQuery(`
     _type,
     title,
     description,
+    image{
+      ...,
+      asset->{
+        ...,
+        metadata{
+          lqip
+        }
+      }
+    },
+    imageAlt,
     introTitle,
     introDescription,
     ctaTitle,
