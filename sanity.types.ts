@@ -16,22 +16,6 @@ import '@sanity/client'
  */
 
 // Source: schema.json
-export type Work = {
-  _id: string
-  _type: 'work'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  description?: string
-  introTitle?: string
-  introDescription?: string
-  ctaTitle?: string
-  ctaDescription?: string
-  ctaHref?: string
-  ctaButtonText?: string
-}
-
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -39,9 +23,9 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
-export type Contact = {
+export type Work = {
   _id: string
-  _type: 'contact'
+  _type: 'work'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -54,21 +38,11 @@ export type Contact = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  email?: string
-  phone?: string
-  address?: {
-    street?: string
-    city?: string
-    postalCode?: string
-  }
-  socialLinks?: {
-    instagram?: string
-    facebook?: string
-    linkedin?: string
-    pinterest?: string
-  }
-  formTitle?: string
-  formDescription?: string
+  imageAlt?: string
+  introTitle?: string
+  introDescription?: string
+  ctaTitle?: string
+  ctaDescription?: string
   ctaHref?: string
   ctaButtonText?: string
 }
@@ -87,6 +61,42 @@ export type SanityImageHotspot = {
   y?: number
   height?: number
   width?: number
+}
+
+export type Contact = {
+  _id: string
+  _type: 'contact'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imageAlt?: string
+  email?: string
+  contactFormEmail?: string
+  phone?: string
+  address?: {
+    street?: string
+    city?: string
+    postalCode?: string
+  }
+  socialLinks?: {
+    instagram?: string
+    facebook?: string
+    linkedin?: string
+    pinterest?: string
+  }
+  formTitle?: string
+  formDescription?: string
+  ctaHref?: string
+  ctaButtonText?: string
 }
 
 export type Portfolio = {
@@ -314,11 +324,11 @@ export type Slug = {
 }
 
 export type AllSanitySchemaTypes =
-  | Work
   | SanityImageAssetReference
-  | Contact
+  | Work
   | SanityImageCrop
   | SanityImageHotspot
+  | Contact
   | Portfolio
   | Offer
   | Settings
@@ -502,7 +512,7 @@ export type OfferPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: contactPageQuery
-// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image{      ...,      asset->{        ...,        metadata{          lqip        }      }    },    email,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription,    ctaHref,    ctaButtonText  }
+// Query: *[_type == "contact"][0]{    _id,    _type,    title,    description,    image{      ...,      asset->{        ...,        metadata{          lqip        }      }    },    imageAlt,    email,    contactFormEmail,    phone,    address{      street,      city,      postalCode    },    socialLinks{      instagram,      facebook,      linkedin,      pinterest    },    formTitle,    formDescription,    ctaHref,    ctaButtonText  }
 export type ContactPageQueryResult = {
   _id: string
   _type: 'contact'
@@ -538,7 +548,9 @@ export type ContactPageQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   } | null
+  imageAlt: string | null
   email: string | null
+  contactFormEmail: string | null
   phone: string | null
   address: {
     street: string | null
@@ -559,12 +571,43 @@ export type ContactPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: workPageQuery
-// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    introTitle,    introDescription,    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
+// Query: *[_type == "work"][0]{    _id,    _type,    title,    description,    image{      ...,      asset->{        ...,        metadata{          lqip        }      }    },    imageAlt,    introTitle,    introDescription,    ctaTitle,    ctaDescription,    ctaHref,    ctaButtonText  }
 export type WorkPageQueryResult = {
   _id: string
   _type: 'work'
   title: string | null
   description: string | null
+  image: {
+    asset: {
+      _id: string
+      _type: 'sanity.imageAsset'
+      _createdAt: string
+      _updatedAt: string
+      _rev: string
+      originalFilename?: string
+      label?: string
+      title?: string
+      description?: string
+      altText?: string
+      sha1hash?: string
+      extension?: string
+      mimeType?: string
+      size?: number
+      assetId?: string
+      uploadId?: string
+      path?: string
+      url?: string
+      metadata: {
+        lqip: string | null
+      } | null
+      source?: SanityAssetSourceData
+    } | null
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  imageAlt: string | null
   introTitle: string | null
   introDescription: string | null
   ctaTitle: string | null
@@ -583,8 +626,8 @@ declare module '@sanity/client' {
     '\n  *[_type == "home"][0]{\n    _id,\n    _type,\n    imagesCarousel[]{\n      _key,\n      _id,\n      _type,\n      image{\n        ...,\n        asset->{\n          ...,\n          metadata{\n            lqip\n          }\n        }\n      },\n      imageAlt,\n      title,\n      description,\n      link,\n      hoverText\n    },\n    title,\n    description\n  }\n': HomePageQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    logoImage{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n  }\n': SettingsQueryResult
     '\n  *[_type == "offer"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    services[]{\n      _key,\n      title,\n      description,\n      note,\n      variants[]{\n        _key,\n        image{\n          ...,\n          asset->{\n            ...,\n            metadata{\n              lqip\n            }\n          }\n        },\n        imageAlt,\n        badge,\n        name,\n        isRecommended,\n        items,\n        note\n      }\n    },\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': OfferPageQueryResult
-    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n    email,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
-    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    introTitle,\n    introDescription,\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': WorkPageQueryResult
+    '\n  *[_type == "contact"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n    imageAlt,\n    email,\n    contactFormEmail,\n    phone,\n    address{\n      street,\n      city,\n      postalCode\n    },\n    socialLinks{\n      instagram,\n      facebook,\n      linkedin,\n      pinterest\n    },\n    formTitle,\n    formDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': ContactPageQueryResult
+    '\n  *[_type == "work"][0]{\n    _id,\n    _type,\n    title,\n    description,\n    image{\n      ...,\n      asset->{\n        ...,\n        metadata{\n          lqip\n        }\n      }\n    },\n    imageAlt,\n    introTitle,\n    introDescription,\n    ctaTitle,\n    ctaDescription,\n    ctaHref,\n    ctaButtonText\n  }\n': WorkPageQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }
