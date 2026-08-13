@@ -10,6 +10,11 @@ export const menuObj = [
     title: 'Oferta',
   },
   {
+    id: 'nav-about',
+    href: '/o-nas',
+    title: 'O nas',
+  },
+  {
     id: 'nav-contact',
     href: '/kontakt',
     title: 'Kontakt',

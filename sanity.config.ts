@@ -12,6 +12,7 @@ import {defineConfig} from 'sanity'
 import {unsplashImageAsset} from 'sanity-plugin-asset-source-unsplash'
 import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
+import about from './sanity/schemas/singletons/about'
 import contact from './sanity/schemas/singletons/contact'
 import offer from './sanity/schemas/singletons/offer'
 import portfolio from './sanity/schemas/singletons/portfolio'
@@ -32,13 +33,14 @@ export default defineConfig({
       settings,
       offer,
       portfolio,
+      about,
       contact,
       work,
     ],
   },
   plugins: [
     structureTool({
-      structure: pageStructure([home, settings, offer, portfolio, contact, work]),
+      structure: pageStructure([home, settings, offer, portfolio, about, contact, work]),
     }),
     presentationTool({
       previewUrl: {previewMode: {enable: '/api/draft-mode/enable'}},
@@ -49,6 +51,7 @@ export default defineConfig({
       settings.name,
       offer.name,
       portfolio.name,
+      about.name,
       contact.name,
       work.name,
     ]),

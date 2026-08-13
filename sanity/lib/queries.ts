@@ -82,6 +82,40 @@ export const offerPageQuery = defineQuery(`
   }
 `)
 
+export const aboutPageQuery = defineQuery(`
+  *[_type == "about"][0]{
+    _id,
+    _type,
+    title,
+    description,
+    team[]{
+      _key,
+      image{
+        ...,
+        asset->{
+          ...,
+          metadata{
+            lqip
+          }
+        }
+      },
+      imageAlt,
+      name,
+      role,
+      bio,
+      quote,
+      specializations,
+      email,
+      phone,
+      instagram
+    },
+    ctaTitle,
+    ctaDescription,
+    ctaHref,
+    ctaButtonText
+  }
+`)
+
 // export const portfolioPageQuery = defineQuery(`
 //   *[_type == "portfolio"][0]{
 //     _id,
